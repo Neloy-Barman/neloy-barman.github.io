@@ -897,6 +897,15 @@ section .container {
   background: #09203a;
 }
 
+.icon_box{
+  margin: 5px;
+  width: 65px;
+  height: 65px;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 .contact .info-box i.bx {
   font-size: 24px;
   color: #dee2e6;
