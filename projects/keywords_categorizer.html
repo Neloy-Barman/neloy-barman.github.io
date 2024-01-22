@@ -3,11 +3,11 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
   
     <title>Keywords Categorizer</title>
-    <meta content="" name="descriptison">
+    <meta content="" name="description">
     <meta content="" name="keywords">
   
     <!-- Favicons -->
-    <link href="../assets/img/icons/header_icon.png" rel="icon">
+    <link rel="icon" type="image/png" href="../assets/img/icons/header_icon.png"/>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -51,10 +51,17 @@
                   <li><strong>IDE: </strong>VS Code</li>
                   <li><strong>Notebook: </strong>Google Colab</li>
                 </ul>
+                <li><strong>Website Integration</strong>: <a href="https://scientific-paper-keywords-categorization.onrender.com/" target="_blank">Link</a></li>
                 <li><strong>Github URL</strong>: <a href="https://github.com/Neloy-Barman/Scientific-Paper-Keywords-Categorization" target="_blank">Project Link</a></li>
                 <!-- <li><strong>Video Demonstration</strong>: <a href="https://www.linkedin.com/feed/update/urn:li:activity:7154152192059293696/" target="_blank">Link</a></li> -->
               </ul>
                 <p>
+                    I decided to perform a multi-label classification task. 
+                    The main goal is to categorize some optimized keywords based on papers abstract to show the paper to the relatable users. 
+                    That's why I scraped IEEE. I fetched papers abstract and the keywords. Then I performed data cleaning and data preprocessing parts to feed transformers. 
+                    I choose BERT, DistilBERT and RoBERTa as the learners. After haivng trained, the BERT showed a better performance than others. 
+                    As the model was larger in size, I compressed the model using ONNX and it costs slightly decreasing performancce.
+                    I deployed the model to huggingface. Lastly, I created a website from scratch using flask and integrated the model api.
                 </p>
             </div>
           </div>
