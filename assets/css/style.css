@@ -99,22 +99,29 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
 }
 
-#header .social-links a {
-  font-size: 16px;
+/* #header .social-links a {
+  font-size: 16px; 
   display: flex;
   justify-content: center;
   align-items: center;
   background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  color: #fff; 
   line-height: 1;
   margin-right: 8px;
   border-radius: 50%;
   width: 40px;
   height: 40px;
+} */
+
+#header .social-links a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #header .social-links a:hover {
   background: #1c7d32;
+  border-radius: 50%;
 }
 
 @media (max-width: 992px) {
@@ -898,10 +905,10 @@ section .container {
 }
 
 .icon_box{
-  margin: 5px;
-  width: 65px;
-  height: 65px;
-  padding: 10px;
+  margin: 3px;
+  width: 55px;
+  height: 55px;
+  padding: 5px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.1);
 }
@@ -946,6 +953,7 @@ section .container {
 
 .contact .info-box .social-links a:hover {
   color: #12d640;
+  border-radius: 50%;
 }
 
 .contact .php-email-form {
