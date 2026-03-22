@@ -1,0 +1,74 @@
+{# templates/base.html #}
+<!doctype html>
+<html lang="en" class="dark" data-theme="dark">
+  <head>
+    {% include "components/seo_head.html" %} {% block extra_head %}{% endblock
+    %}
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"
+    ></script>
+  </head>
+  <body
+    class="bg-dark-base text-gray-100 font-sans antialiased transition-colors duration-300"
+  >
+    <!-- Skip to content -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-cyber-cyan focus:text-dark-base focus:rounded-lg focus:font-semibold"
+    >
+      Skip to content
+    </a>
+
+    <!-- ── Global Neural Background (all pages) ── -->
+    <canvas
+      id="neural-canvas"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.18;
+      "
+    ></canvas>
+
+    <!-- ── Global Glow Orbs (all pages) ── -->
+    <div class="global-orb global-orb-1"></div>
+    <div class="global-orb global-orb-2"></div>
+
+    <!-- ── Global Grid Background ── -->
+    <div
+      style="
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.06;
+        background-image:
+          linear-gradient(rgba(0, 212, 255, 0.4) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 212, 255, 0.4) 1px, transparent 1px);
+        background-size: 60px 60px;
+      "
+    ></div>
+
+    {% include "components/nav.html" %}
+
+    <main
+      id="main-content"
+      class="pt-16"
+      style="position: relative; z-index: 1"
+    >
+      {% block content %}{% endblock %}
+    </main>
+
+    {% include "components/footer.html" %}
+
+    <script defer src="/static/js/theme.js"></script>
+    <script defer src="/static/js/main.js"></script>
+    <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+    {% block extra_scripts %}{% endblock %}
+  </body>
+</html>

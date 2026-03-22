@@ -1,0 +1,88 @@
+{# templates/pages/skills.html #} {% extends "base.html" %} {% block content %}
+
+<section class="py-24 max-w-6xl mx-auto px-4">
+  <!-- Header -->
+  <div class="mb-14">
+    <p class="text-cyber-cyan font-mono text-sm mb-2">// technical expertise</p>
+    <h1 class="text-4xl sm:text-5xl font-bold text-white">
+      Skills & Expertise
+    </h1>
+    <p class="text-gray-400 mt-4 max-w-2xl">
+      Technologies, tools and frameworks I use to build production-grade AI
+      systems.
+    </p>
+  </div>
+
+  {% if skill_categories %}
+  <div class="space-y-10">
+    {% for cat in skill_categories %} {% if cat.skills %}
+
+    <div class="slide-up">
+      <!-- Category Header -->
+      <div class="flex items-center gap-3 mb-5">
+        <!-- <div
+          class="w-8 h-8 rounded-lg bg-dark-card border border-dark-border flex items-center justify-center shrink-0"
+        >
+          <i class="{{ cat.icon_class }} text-cyber-cyan text-xs"></i>
+        </div> -->
+        <h2 class="text-white font-semibold text-base tracking-wide">
+          {{ cat.name }}
+        </h2>
+        <div class="flex-1 h-px bg-dark-border ml-2"></div>
+      </div>
+
+      <!-- Shield Badges Row -->
+      <div class="flex flex-wrap gap-2 pl-11">
+        {% for skill in cat.skills %} {% if skill.icon_url %}
+        <!-- Shields.io image badge -->
+        <a
+          href="#"
+          tabindex="0"
+          aria-label="{{ skill.name }}"
+          class="skill-badge-img transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5 hover:shadow-glow focus:outline-none focus:ring-2 focus:ring-cyber-cyan/50 rounded-sm"
+        >
+          <img
+            src="{{ skill.icon_url }}"
+            alt="{{ skill.name }}"
+            loading="lazy"
+            class="h-6 rounded-sm"
+            onerror="
+              this.style.display = 'none';
+              this.nextElementSibling.style.display = 'inline-flex';
+            "
+          />
+          <!-- Fallback text badge if image fails -->
+          <span
+            style="display: none"
+            class="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-dark-card border border-dark-border text-gray-300 hover:text-cyber-cyan hover:border-cyber-cyan/40 transition-all duration-200"
+          >
+            {{ skill.name }}
+          </span>
+        </a>
+        {% else %}
+        <!-- Fallback text badge if no icon_url -->
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium bg-dark-card border border-dark-border text-gray-300 hover:text-cyber-cyan hover:border-cyber-cyan/40 hover:-translate-y-0.5 hover:shadow-glow transition-all duration-200 cursor-default"
+        >
+          <span class="w-1.5 h-1.5 rounded-full bg-cyber-cyan/50"></span>
+          {{ skill.name }}
+        </span>
+        {% endif %} {% endfor %}
+      </div>
+    </div>
+
+    <!-- Divider between categories -->
+    {% if not loop.last %}
+    <div class="border-t border-dark-border/50"></div>
+    {% endif %} {% endif %} {% endfor %}
+  </div>
+
+  {% else %}
+  <div class="text-center py-20 text-gray-500">
+    <i class="fas fa-code text-4xl mb-4 text-gray-700 block"></i>
+    <p>No skills found.</p>
+  </div>
+  {% endif %}
+</section>
+
+{% endblock %}

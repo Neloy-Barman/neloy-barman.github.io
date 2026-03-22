@@ -1,0 +1,87 @@
+category_id,name,proficiency,display_order,icon_url,is_visible,is_deleted
+1,"LangChain",0,1,"https://img.shields.io/badge/LangChain-1C3C3C?style=flat&logo=langchain&logoColor=white",1,0
+1,"LangGraph",0,2,"https://img.shields.io/badge/LangGraph-1C3C3C?style=flat&logo=langchain&logoColor=white",1,0
+1,"LangSmith",0,3,"https://img.shields.io/badge/LangSmith-1C3C3C?style=flat&logo=langchain&logoColor=white",1,0
+1,"Claude Tool Use",0,4,"https://img.shields.io/badge/Claude_Tool_Use-CC785C?style=flat&logo=anthropic&logoColor=white",1,0
+1,"Claude Computer Use",0,5,"https://img.shields.io/badge/Claude_Computer_Use-CC785C?style=flat&logo=anthropic&logoColor=white",1,0
+2,"Groq",0,1,"https://img.shields.io/badge/Groq-F55036?style=flat&logo=groq&logoColor=white",1,0
+2,"OpenAI",0,2,"https://img.shields.io/badge/OpenAI-412991?style=flat&logo=openai&logoColor=white",1,0
+2,"Anthropic",0,3,"https://img.shields.io/badge/Anthropic-000000?style=flat&logo=anthropic&logoColor=white",1,0
+2,"Hugging Face",0,4,"https://img.shields.io/badge/Hugging%20Face-FFD21E?style=flat&logo=huggingface&logoColor=black",1,0
+3,"claude-3-5-sonnet",0,1,"https://img.shields.io/badge/claude--3--5--sonnet-CC785C?style=flat-square&logo=anthropic&logoColor=white",1,0
+3,"claude-3-5-haiku",0,2,"https://img.shields.io/badge/claude--3--5--haiku-CC785C?style=flat-square&logo=anthropic&logoColor=white",1,0
+3,"gpt-oss-20b",0,3,"https://img.shields.io/badge/gpt--oss--20b-412991?style=flat-square&logo=openai&logoColor=white",1,0
+3,"gpt-4o-mini",0,4,"https://img.shields.io/badge/gpt--4o--mini-412991?style=flat-square&logo=openai&logoColor=white",1,0
+3,"whisper-large-v3-turbo",0,5,"https://img.shields.io/badge/whisper--large--v3--turbo-412991?style=flat-square&logo=openai&logoColor=white",1,0
+3,"gemini-flash-latest",0,6,"https://img.shields.io/badge/gemini--flash--latest-4285F4?style=flat-square&logo=google&logoColor=white",1,0
+3,"gemini-flash-lite-latest",0,7,"https://img.shields.io/badge/gemini--flash--lite--latest-4285F4?style=flat-square&logo=google&logoColor=white",1,0
+3,"llama-3.1-8b-instant",0,8,"https://img.shields.io/badge/llama--3.1--8b--instant-0467DF?style=flat-square&logo=meta&logoColor=white",1,0
+3,"llama-3.2-3b-instruct",0,9,"https://img.shields.io/badge/llama--3.2--3b--instruct-0467DF?style=flat-square&logo=meta&logoColor=white",1,0
+3,"qwen3-4b",0,10,"https://img.shields.io/badge/qwen3--4b-FF6A00?style=flat-square&logo=alibabadotcom&logoColor=white",1,0
+3,"qwen2-vl-7b-instruct",0,11,"https://img.shields.io/badge/qwen2--vl--7b--instruct-FF6A00?style=flat-square&logo=alibabadotcom&logoColor=white",1,0
+3,"phi-3.5-mini-instruct",0,12,"https://img.shields.io/badge/phi--3.5--mini--instruct-00A4EF?style=flat-square&logo=microsoft&logoColor=white",1,0
+4,"n8n",0,1,"https://img.shields.io/badge/n8n-EA4B71?style=flat&logo=n8n&logoColor=white",1,0
+5,"Qdrant",0,1,"https://img.shields.io/badge/Qdrant-DC244C?style=flat&logo=qdrant&logoColor=white",1,0
+5,"Pinecone",0,2,"https://img.shields.io/badge/Pinecone-000000?style=flat&logoColor=white",1,0
+5,"FAISS by Meta",0,3,"https://img.shields.io/badge/FAISS%20by%20Meta-0467DF?style=flat&logo=meta&logoColor=white",1,0
+6,"Ollama",0,1,"https://img.shields.io/badge/Ollama-000000?style=flat&logo=ollama&logoColor=white",1,0
+6,"LM Studio",0,2,"https://img.shields.io/badge/LM%20Studio-8A2BE2?style=flat&logoColor=white",1,0
+7,"Discord",0,1,"https://img.shields.io/badge/Discord-5865F2?style=flat&logo=discord&logoColor=white",1,0
+7,"Slack",0,2,"https://img.shields.io/badge/Slack-4A154B?style=flat&logo=slack&logoColor=white",1,0
+7,"Telegram",0,3,"https://img.shields.io/badge/Telegram-2CA5E0?style=flat&logo=telegram&logoColor=white",1,0
+7,"WhatsApp",0,4,"https://img.shields.io/badge/WhatsApp-25D366?style=flat&logo=whatsapp&logoColor=white",1,0
+7,"Instagram",0,5,"https://img.shields.io/badge/Instagram-E4405F?style=flat&logo=instagram&logoColor=white",1,0
+7,"Messenger",0,6,"https://img.shields.io/badge/Messenger-00B2FF?style=flat&logo=messenger&logoColor=white",1,0
+7,"Gupshup",0,7,"https://img.shields.io/badge/Gupshup-FF6B35?style=flat&logoColor=white",1,0
+8,"LiveKit",0,1,"https://img.shields.io/badge/LiveKit-DC2626?style=flat&logo=livekit&logoColor=white",1,0
+8,"Deepgram",0,2,"https://img.shields.io/badge/Deepgram-101010?style=flat&logoColor=00FF00",1,0
+8,"AssemblyAI",0,3,"https://img.shields.io/badge/AssemblyAI-3B82F6?style=flat&logoColor=white",1,0
+8,"ElevenLabs",0,4,"https://img.shields.io/badge/ElevenLabs-000000?style=flat&logoColor=white",1,0
+9,"Python",0,1,"https://img.shields.io/badge/Python-3670A0?style=flat&logo=python&logoColor=ffdd54",1,0
+9,"JavaScript",0,2,"https://img.shields.io/badge/JavaScript-323330?style=flat&logo=javascript&logoColor=F7DF1E",1,0
+9,"Java",0,3,"https://img.shields.io/badge/Java-ED8B00?style=flat&logo=openjdk&logoColor=white",1,0
+9,"C",0,4,"https://img.shields.io/badge/C-00599C?style=flat&logo=c&logoColor=white",1,0
+9,"Dart",0,5,"https://img.shields.io/badge/Dart-0175C2?style=flat&logo=dart&logoColor=white",1,0
+10,"FastAPI",0,1,"https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white",1,0
+10,"REST API",0,2,"https://img.shields.io/badge/REST%20API-FF6C37?style=flat&logo=postman&logoColor=white",1,0
+10,"Flask",0,3,"https://img.shields.io/badge/Flask-000000?style=flat&logo=flask&logoColor=white",1,0
+10,"Django",0,4,"https://img.shields.io/badge/Django-092E20?style=flat&logo=django&logoColor=white",1,0
+10,"WebSockets",0,5,"https://img.shields.io/badge/WebSockets-010101?style=flat&logo=socketdotio&logoColor=white",1,0
+11,"AWS Lambda",0,1,"https://img.shields.io/badge/AWS%20Lambda-FF9900?style=flat&logo=awslambda&logoColor=white",1,0
+11,"AWS Lex",0,2,"https://img.shields.io/badge/AWS%20Lex-232F3E?style=flat&logo=amazonaws&logoColor=FF9900",1,0
+11,"AWS SES",0,3,"https://img.shields.io/badge/AWS%20SES-232F3E?style=flat&logo=amazonaws&logoColor=FF9900",1,0
+11,"Supabase",0,4,"https://img.shields.io/badge/Supabase-3ECF8E?style=flat&logo=supabase&logoColor=white",1,0
+11,"Firebase",0,5,"https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=firebase&logoColor=black",1,0
+11,"Render",0,6,"https://img.shields.io/badge/Render-46E3B7?style=flat&logo=render&logoColor=white",1,0
+11,"Dialogflow",0,7,"https://img.shields.io/badge/Dialogflow-FF9800?style=flat&logo=dialogflow&logoColor=white",1,0
+11,"Cloudflare",0,8,"https://img.shields.io/badge/Cloudflare-F38020?style=flat&logo=cloudflare&logoColor=white",1,0
+12,"PostgreSQL",0,1,"https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white",1,0
+12,"Redis",0,2,"https://img.shields.io/badge/Redis-DC382D?style=flat&logo=redis&logoColor=white",1,0
+12,"SQLite",0,3,"https://img.shields.io/badge/SQLite-07405E?style=flat&logo=sqlite&logoColor=white",1,0
+12,"SQL Server",0,4,"https://img.shields.io/badge/SQL%20Server-CC2927?style=flat&logo=microsoftsqlserver&logoColor=white",1,0
+13,"PyTorch",0,1,"https://img.shields.io/badge/PyTorch-EE4C2C?style=flat&logo=pytorch&logoColor=white",1,0
+13,"Scikit-Learn",0,2,"https://img.shields.io/badge/Scikit--Learn-F7931E?style=flat&logo=scikit-learn&logoColor=white",1,0
+13,"Keras",0,3,"https://img.shields.io/badge/Keras-D00000?style=flat&logo=keras&logoColor=white",1,0
+13,"Pandas",0,4,"https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white",1,0
+13,"NumPy",0,5,"https://img.shields.io/badge/NumPy-013243?style=flat&logo=numpy&logoColor=white",1,0
+13,"Matplotlib",0,6,"https://img.shields.io/badge/Matplotlib-ffffff?style=flat&logo=matplotlib&logoColor=black",1,0
+14,"Streamlit",0,1,"https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white",1,0
+14,"HTML5",0,2,"https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white",1,0
+14,"CSS3",0,3,"https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white",1,0
+14,"Flutter",0,4,"https://img.shields.io/badge/Flutter-02569B?style=flat&logo=flutter&logoColor=white",1,0
+15,"Docker",0,1,"https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white",1,0
+15,"Git",0,2,"https://img.shields.io/badge/Git-F05033?style=flat&logo=git&logoColor=white",1,0
+15,"GitHub",0,3,"https://img.shields.io/badge/GitHub-121011?style=flat&logo=github&logoColor=white",1,0
+15,"GitLab",0,4,"https://img.shields.io/badge/GitLab-FC6D26?style=flat&logo=gitlab&logoColor=white",1,0
+15,"VirtualBox",0,5,"https://img.shields.io/badge/VirtualBox-183A61?style=flat&logo=virtualbox&logoColor=white",1,0
+15,"Kali Linux",0,6,"https://img.shields.io/badge/Kali%20Linux-557C94?style=flat&logo=kalilinux&logoColor=white",1,0
+15,"Parrot OS",0,7,"https://img.shields.io/badge/Parrot%20OS-15E0ED?style=flat&logo=linux&logoColor=black",1,0
+15,"CI/CD",0,8,"https://img.shields.io/badge/CI%2FCD-2088FF?style=flat&logo=githubactions&logoColor=white",1,0
+16,"VS Code",0,1,"https://img.shields.io/badge/VS%20Code-0078D7?style=flat&logo=visual-studio-code&logoColor=white",1,0
+16,"PyCharm",0,2,"https://img.shields.io/badge/PyCharm-000000?style=flat&logo=pycharm&logoColor=white&labelColor=green",1,0
+16,"Google Colab",0,3,"https://img.shields.io/badge/Google%20Colab-F9AB00?style=flat&logo=googlecolab&logoColor=white",1,0
+16,"Jupyter",0,4,"https://img.shields.io/badge/Jupyter-FA0F00?style=flat&logo=jupyter&logoColor=white",1,0
+16,"Android Studio",0,5,"https://img.shields.io/badge/Android%20Studio-3DDC84?style=flat&logo=android-studio&logoColor=white",1,0
+17,"Markdown",0,1,"https://img.shields.io/badge/Markdown-000000?style=flat&logo=markdown&logoColor=white",1,0
+17,"Affinity",0,2,"https://img.shields.io/badge/Affinity-1B2E4B?style=flat&logo=affinity&logoColor=white",1,0
+17,"LaTeX",0,3,"https://img.shields.io/badge/LaTeX-008080?style=flat&logo=latex&logoColor=white",1,0

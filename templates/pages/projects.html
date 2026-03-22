@@ -1,0 +1,727 @@
+{# templates/pages/projects.html #} {% extends "base.html" %} {% block content
+%}
+
+<section class="py-24 max-w-7xl mx-auto px-4">
+  <!-- Header -->
+  <div class="mb-12">
+    <p class="text-cyber-cyan font-mono text-sm mb-2">// what i've built</p>
+    <h1 class="text-4xl sm:text-5xl font-bold text-white">
+      Projects & Portfolio
+    </h1>
+    <p class="text-gray-400 mt-4 max-w-2xl">
+      A collection of AI systems, open-source tools, and production deployments.
+    </p>
+  </div>
+
+  <!-- Filter Tags -->
+  <div class="flex flex-wrap gap-2 mb-10" id="tag-filters">
+    <button
+      class="filter-btn active px-4 py-1.5 rounded-full text-sm font-medium border border-cyber-cyan bg-cyber-cyan/10 text-cyber-cyan transition-all"
+      data-filter="all"
+    >
+      All
+    </button>
+
+    {# ── Collect unique tags as full objects ──────────────────────── #} {% set
+    seen_slugs = [] %} {% set unique_tags = [] %} {% for project in projects %}
+    {% for tag in project.tags %} {% if tag.slug not in seen_slugs %} {% set _ =
+    seen_slugs.append(tag.slug) %} {% set _ = unique_tags.append(tag) %} {%
+    endif %} {% endfor %} {% endfor %} {# ── Sort by display_order and render
+    ────────────────────────── #} {% for tag in unique_tags |
+    sort(attribute='display_order') %}
+    <button
+      class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-dark-border text-gray-400 hover:border-cyber-cyan/50 hover:text-cyber-cyan transition-all"
+      data-filter="{{ tag.slug }}"
+    >
+      {{ tag.name }}
+    </button>
+    {% endfor %}
+  </div>
+  <!-- Projects Grid -->
+  {% if projects %}
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+    id="projects-grid"
+  >
+    {% for project in projects %}
+    <article
+      class="project-card group relative rounded-2xl border border-dark-border overflow-hidden hover:border-cyber-cyan/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-glow slide-up bg-dark-card/40 cursor-pointer"
+      data-tags="{{ project.tags | map(attribute='slug') | join(',') }}"
+      data-id="{{ project.id }}"
+      onclick="openModal({{ loop.index0 }})"
+    >
+      <!-- Badges -->
+      {% if project.featured %}
+      <div
+        class="absolute top-3 left-3 z-10 px-2 py-0.5 rounded-full text-xs bg-amber-500/20 text-amber-400 border border-amber-500/30 font-medium"
+      >
+        ⭐ Featured
+      </div>
+      {% endif %} {% if project.status == 'in-progress' %}
+      <div
+        class="absolute top-3 right-3 z-10 px-2 py-0.5 rounded-full text-xs bg-blue-500/20 text-blue-400 border border-blue-500/30"
+      >
+        In Progress
+      </div>
+      {% endif %}
+
+      <!-- Image -->
+      <div class="aspect-video overflow-hidden bg-dark-base relative">
+        <img
+          src="{{ project.image_url or 'https://placehold.co/800x450/0a0f1e/00d4ff?text=' + project.title }}"
+          alt="{{ project.title }}"
+          loading="lazy"
+          class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+          onerror="
+            this.style.display = 'none';
+            this.nextElementSibling.style.display = 'flex';
+          "
+        />
+        <!-- Fallback gradient with title -->
+        <div
+          class="absolute inset-0 items-center justify-center"
+          style="
+            display: none;
+            background: linear-gradient(135deg, #0a0f1e, #0f1629);
+          "
+        >
+          <span class="text-2xl font-bold gradient-text px-4 text-center"
+            >{{ project.title.split(':')[0] }}</span
+          >
+        </div>
+        <!-- Hover overlay -->
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-dark-base/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4"
+        >
+          <span
+            class="text-white text-sm font-medium flex items-center gap-2 bg-cyber-cyan/20 border border-cyber-cyan/40 px-4 py-1.5 rounded-full backdrop-blur-sm"
+          >
+            <i class="fas fa-expand-alt text-cyber-cyan"></i> View Details
+          </span>
+        </div>
+      </div>
+
+      <!-- Card Content -->
+      <div class="p-6">
+        <h2
+          class="font-bold text-white text-lg leading-tight mb-2 group-hover:text-cyber-cyan transition-colors"
+        >
+          {{ project.title }}
+        </h2>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-3">
+          {{ project.short_desc }}
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          {% for tag in project.tags %}
+          <span
+            class="text-xs px-2 py-0.5 rounded-md bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/20"
+            >{{ tag.name }}</span
+          >
+          {% endfor %}
+        </div>
+        {# ── Collect available links ──────────────────────────────────── #} {%
+        set links = [] %} {% if project.github_url %} {% set _ = links.append({
+        'url': project.github_url, 'icon': 'fab fa-github', 'label': 'Source',
+        'class': 'text-gray-400 hover:text-white' }) %} {% endif %} {% if
+        project.workflow_url %} {% set _ = links.append({ 'url':
+        project.workflow_url, 'icon': 'fas fa-project-diagram', 'label':
+        'Workflow', 'class': 'text-gray-400 hover:text-white' }) %} {% endif %}
+        {% if project.dashboard_url %} {% set _ = links.append({ 'url':
+        project.dashboard_url, 'icon': 'fas fa-chart-bar', 'label': 'Dashboard',
+        'class': 'text-gray-400 hover:text-white' }) %} {% endif %} {% if
+        project.integration_url %} {% set _ = links.append({ 'url':
+        project.integration_url, 'icon': 'fas fa-plug', 'label': 'Integration',
+        'class': 'text-gray-400 hover:text-white' }) %} {% endif %} {% if
+        project.demo_url %} {% set _ = links.append({ 'url': project.demo_url,
+        'icon': 'fas fa-external-link-alt', 'label': 'Live Demo', 'class':
+        'text-cyber-cyan hover:text-white' }) %} {% endif %} {# ── Render based
+        on count ────────────────────────────────────── #} {% if links | length
+        > 0 %}
+        <div
+          class="flex items-center justify-between gap-2 pt-4 border-t border-dark-border"
+          onclick="event.stopPropagation()"
+        >
+          {# Only 1 link — place on left #} {% if links | length == 1 %}
+          <a
+            href="{{ links[0].url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-1.5 text-sm {{ links[0].class }} transition-colors"
+          >
+            <i class="{{ links[0].icon }}"></i> {{ links[0].label }}
+          </a>
+
+          {# 2 links — one left, one right #} {% elif links | length == 2 %}
+          <a
+            href="{{ links[0].url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-1.5 text-sm {{ links[0].class }} transition-colors"
+          >
+            <i class="{{ links[0].icon }}"></i> {{ links[0].label }}
+          </a>
+          <a
+            href="{{ links[1].url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-1.5 text-sm {{ links[1].class }} transition-colors"
+          >
+            <i class="{{ links[1].icon }}"></i> {{ links[1].label }}
+          </a>
+
+          {# 3+ links — first left, last right, rest in middle #} {% else %} {#
+          Left — first link #}
+          <a
+            href="{{ links[0].url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-1.5 text-sm {{ links[0].class }} transition-colors"
+          >
+            <i class="{{ links[0].icon }}"></i> {{ links[0].label }}
+          </a>
+
+          {# Middle — everything except first and last #}
+          <div class="flex items-center gap-4 flex-wrap justify-center">
+            {% for link in links[1:-1] %}
+            <a
+              href="{{ link.url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-1.5 text-sm {{ link.class }} transition-colors"
+            >
+              <i class="{{ link.icon }}"></i> {{ link.label }}
+            </a>
+            {% endfor %}
+          </div>
+
+          {# Right — last link #}
+          <a
+            href="{{ links[-1].url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-1.5 text-sm {{ links[-1].class }} transition-colors"
+          >
+            <i class="{{ links[-1].icon }}"></i> {{ links[-1].label }}
+          </a>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="text-center py-20 text-gray-500">
+    <i class="fas fa-folder-open text-4xl mb-4 text-gray-700 block"></i>
+    <p>No projects found.</p>
+  </div>
+  {% endif %}
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     PROJECT MODAL
+═══════════════════════════════════════════════════════ -->
+<div
+  id="project-modal"
+  class="fixed inset-0 z-50 flex items-center justify-center p-4"
+  style="display: none !important"
+>
+  <!-- Backdrop -->
+  <div
+    id="modal-backdrop"
+    class="absolute inset-0 bg-dark-base/80 backdrop-blur-md"
+    onclick="closeModal()"
+  ></div>
+
+  <!-- Modal Window -->
+  <div
+    id="modal-window"
+    class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl border border-dark-border bg-dark-card shadow-2xl shadow-black/50 modal-slide-in"
+    style="scrollbar-width: thin"
+  >
+    <!-- Close Button -->
+    <button
+      onclick="closeModal()"
+      class="absolute top-4 right-4 z-10 w-8 h-8 rounded-lg bg-dark-base/80 border border-dark-border flex items-center justify-center text-gray-400 hover:text-white hover:border-cyber-cyan/50 transition-all backdrop-blur-sm"
+      aria-label="Close modal"
+    >
+      <i class="fas fa-times text-sm"></i>
+    </button>
+
+    <!-- Modal Content (injected by JS) -->
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- Project Data for JS -->
+<script id="projects-data" type="application/json">
+  [
+    {% for project in projects %}
+    {
+      "title":           {{ project.title | tojson }},
+      "short_desc":      {{ project.short_desc | tojson }},
+      "long_desc":       {{ (project.long_desc or '') | tojson }},
+      "image_url":       {{ (project.image_url or '') | tojson }},
+      "github_url":      {{ (project.github_url or '') | tojson }},
+      "demo_url":        {{ (project.demo_url or '') | tojson }},
+      "workflow_url":    {{ (project.workflow_url or '') | tojson }},
+      "dashboard_url":   {{ (project.dashboard_url or '') | tojson }},
+      "integration_url": {{ (project.integration_url or '') | tojson }},
+      "status":          {{ (project.status or 'completed') | tojson }},
+      "featured":        {{ 'true' if project.featured else 'false' }},
+      "publish_date":    {{ (project.publish_date or '') | tojson }},
+      "tags": [{% for tag in project.tags %}{{ tag.name | tojson }}{% if not loop.last %},{% endif %}{% endfor %}]
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+</script>
+
+{% endblock %} {% block extra_scripts %}
+<script>
+  /* ══════════════════════════════════════════
+   PROJECT MODAL SYSTEM
+══════════════════════════════════════════ */
+  var PROJECTS = [];
+  try {
+    PROJECTS = JSON.parse(document.getElementById("projects-data").textContent);
+  } catch (e) {
+    console.error("Project data parse error:", e);
+  }
+
+  function parseMarkdown(text) {
+    if (!text) return "";
+
+    var lines = text.split("\n");
+    var html = "";
+    var inCodeBlock = false;
+    var codeContent = "";
+    var listStack = [];
+
+    function getIndent(line) {
+      return line.match(/^(\s*)/)[1].length;
+    }
+
+    function closeAllLists() {
+      while (listStack.length > 0) {
+        var top = listStack.pop();
+        html += top.type === "ul" ? "</ul>" : "</ol>";
+      }
+    }
+
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i];
+      var trimmed = line.trim();
+
+      // ── Code block ────────────────────────────────────────────────
+      if (trimmed.startsWith("```")) {
+        if (!inCodeBlock) {
+          inCodeBlock = true;
+          codeContent = "";
+        } else {
+          inCodeBlock = false;
+          html +=
+            '<pre class="bg-dark-base border border-dark-border rounded-lg p-4 overflow-x-auto my-3">' +
+            '<code class="text-cyber-cyan font-mono text-xs">' +
+            escHtml(codeContent.trim()) +
+            "</code></pre>";
+        }
+        continue;
+      }
+
+      if (inCodeBlock) {
+        codeContent += line + "\n";
+        continue;
+      }
+
+      var indent = getIndent(line);
+      var isUL = trimmed.match(/^[-*+] /);
+      var isOL = trimmed.match(/^(\d+)\. /);
+
+      // ── List items ────────────────────────────────────────────────
+      if (isUL || isOL) {
+        var listType = isUL ? "ul" : "ol";
+
+        if (listStack.length === 0) {
+          // Brand new top-level list
+          html +=
+            listType === "ul"
+              ? '<ul class="space-y-1 my-3">'
+              : '<ol class="space-y-1 my-3">';
+          listStack.push({ type: listType, indent: indent });
+        } else {
+          var top = listStack[listStack.length - 1];
+
+          if (indent > top.indent) {
+            // Going DEEPER — strip last </li>, open nested list inside it
+            if (html.endsWith("</div></li>")) {
+              html = html.slice(0, -11); // remove </div></li>
+              // reopen with nested list below the text div
+              html +=
+                listType === "ul"
+                  ? '</div><ul class="space-y-1 mt-2 ml-5">'
+                  : '</div><ol class="space-y-1 mt-2 ml-5">';
+            }
+            listStack.push({ type: listType, indent: indent });
+          } else if (indent < top.indent) {
+            // Going UP — close deeper lists
+            while (
+              listStack.length > 0 &&
+              listStack[listStack.length - 1].indent > indent
+            ) {
+              var closing = listStack.pop();
+              html += closing.type === "ul" ? "</ul></li>" : "</ol></li>";
+            }
+          }
+          // Same indent → just continue
+        }
+
+        // ── Render list item
+        // Use flex-col so nested list appears BELOW the text, not beside it
+        if (isUL) {
+          html +=
+            '<li class="flex flex-col">' +
+            '<div class="flex items-start gap-2">' +
+            '<span class="text-cyber-cyan mt-1 shrink-0">▸</span>' +
+            "<span>" +
+            applyInline(trimmed.slice(2)) +
+            "</span>" +
+            "</div>" +
+            "</li>";
+        } else {
+          var olNum = isOL[1];
+          html +=
+            '<li class="flex flex-col text-gray-300">' +
+            '<div class="flex items-start gap-2">' +
+            '<span class="text-cyber-cyan font-mono text-sm shrink-0 mt-0.5 min-w-[1.2rem]">' +
+            olNum +
+            ".</span>" +
+            "<span>" +
+            applyInline(trimmed.replace(/^\d+\. /, "")) +
+            "</span>" +
+            "</div>" +
+            "</li>";
+        }
+
+        continue;
+      }
+
+      // ── Not a list item — close all open lists ─────────────────────
+      closeAllLists();
+
+      // ── Headings ───────────────────────────────────────────────────
+      if (trimmed.startsWith("### ")) {
+        html +=
+          '<h3 class="text-base font-bold text-cyber-cyan mt-4 mb-2">' +
+          applyInline(trimmed.slice(4)) +
+          "</h3>";
+      } else if (trimmed.startsWith("## ")) {
+        html +=
+          '<h2 class="text-lg font-bold text-white mt-5 mb-2">' +
+          applyInline(trimmed.slice(3)) +
+          "</h2>";
+      } else if (trimmed.startsWith("# ")) {
+        html +=
+          '<h1 class="text-xl font-bold text-white mt-6 mb-3">' +
+          applyInline(trimmed.slice(2)) +
+          "</h1>";
+
+        // ── Horizontal rule ────────────────────────────────────────────
+      } else if (trimmed === "---") {
+        html += '<hr class="border-dark-border my-4">';
+
+        // ── Blockquote ─────────────────────────────────────────────────
+      } else if (trimmed.startsWith("> ")) {
+        html +=
+          '<blockquote class="border-l-2 border-cyber-cyan/50 pl-4 italic text-gray-400 my-2">' +
+          applyInline(trimmed.slice(2)) +
+          "</blockquote>";
+
+        // ── Empty line ─────────────────────────────────────────────────
+      } else if (trimmed === "") {
+        html += "";
+
+        // ── Paragraph ──────────────────────────────────────────────────
+      } else {
+        html +=
+          '<p class="text-gray-300 leading-relaxed my-2">' +
+          applyInline(trimmed) +
+          "</p>";
+      }
+    }
+
+    closeAllLists();
+    return html;
+  }
+
+  // Inline styles: bold, italic, code, links
+  function applyInline(text) {
+    return (
+      text
+        // Inline code
+        .replace(
+          /`([^`]+)`/g,
+          '<code class="px-1.5 py-0.5 rounded bg-dark-base text-cyber-cyan font-mono text-xs border border-dark-border">\$1</code>',
+        )
+        // Bold + Italic
+        .replace(
+          /\*\*\*(.*?)\*\*\*/g,
+          '<strong class="text-white font-semibold"><em>\$1</em></strong>',
+        )
+        // Bold
+        .replace(
+          /\*\*(.*?)\*\*/g,
+          '<strong class="text-white font-semibold">\$1</strong>',
+        )
+        // Italic
+        .replace(/\*(.*?)\*/g, '<em class="text-gray-200 italic">\$1</em>')
+        // Links
+        .replace(
+          /$$([^$$]+)\]\(([^)]+)\)/g,
+          '<a href="\$2" target="_blank" rel="noopener noreferrer" class="text-cyber-cyan underline underline-offset-2 hover:text-white transition-colors">\$1</a>',
+        )
+    );
+  }
+
+  function openModal(index) {
+    var p = PROJECTS[index];
+    if (!p) return;
+    var modal = document.getElementById("project-modal");
+    var content = document.getElementById("modal-content");
+
+    // Convert to markdown
+    var rawDesc = p.long_desc || p.short_desc || "";
+    var longDesc = parseMarkdown(rawDesc);
+
+    // Build tags HTML
+    var tagsHtml = p.tags
+      .map(function (t) {
+        return (
+          '<span class="text-xs px-2 py-1 rounded-md bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/20">' +
+          escHtml(t) +
+          "</span>"
+        );
+      })
+      .join("");
+
+    // Status badge
+    var statusHtml = "";
+    if (p.status === "in-progress") {
+      statusHtml =
+        '<span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">In Progress</span>';
+    } else {
+      statusHtml =
+        '<span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Completed</span>';
+    }
+
+    // Links
+    var linksHtml = "";
+    if (p.github_url) {
+      linksHtml +=
+        '<a href="' +
+        escHtml(p.github_url) +
+        '" target="_blank" rel="noopener noreferrer" ' +
+        'class="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-dark-border ' +
+        "text-gray-300 hover:text-white hover:border-cyber-cyan/50 hover:bg-cyber-cyan/5 " +
+        'transition-all text-sm font-medium">' +
+        '<i class="fab fa-github"></i> View Source Code</a>';
+    }
+
+    if (p.workflow_url) {
+      linksHtml +=
+        '<a href="' +
+        escHtml(p.workflow_url) +
+        '" target="_blank" rel="noopener noreferrer" ' +
+        'class="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-dark-border ' +
+        "text-gray-300 hover:text-white hover:border-cyber-cyan/50 hover:bg-cyber-cyan/5 " +
+        'transition-all text-sm font-medium">' +
+        '<i class="fas fa-project-diagram"></i> View Workflow</a>';
+    }
+
+    if (p.dashboard_url) {
+      linksHtml +=
+        '<a href="' +
+        escHtml(p.dashboard_url) +
+        '" target="_blank" rel="noopener noreferrer" ' +
+        'class="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-dark-border ' +
+        "text-gray-300 hover:text-white hover:border-cyber-cyan/50 hover:bg-cyber-cyan/5 " +
+        'transition-all text-sm font-medium">' +
+        '<i class="fas fa-chart-bar"></i> View Dashboard</a>';
+    }
+
+    if (p.integration_url) {
+      linksHtml +=
+        '<a href="' +
+        escHtml(p.integration_url) +
+        '" target="_blank" rel="noopener noreferrer" ' +
+        'class="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-dark-border ' +
+        "text-gray-300 hover:text-white hover:border-cyber-cyan/50 hover:bg-cyber-cyan/5 " +
+        'transition-all text-sm font-medium">' +
+        '<i class="fas fa-plug"></i> View Integration</a>';
+    }
+
+    if (p.demo_url) {
+      linksHtml +=
+        '<a href="' +
+        escHtml(p.demo_url) +
+        '" target="_blank" rel="noopener noreferrer" ' +
+        'class="flex items-center gap-2 px-5 py-2.5 rounded-xl ' +
+        "bg-gradient-to-r from-cyber-cyan to-cyber-purple " +
+        'text-white hover:opacity-90 transition-all text-sm font-semibold shadow-glow">' +
+        '<i class="fas fa-external-link-alt"></i> Live Demo</a>';
+    }
+
+    // Image or gradient fallback
+    var imageHtml = "";
+    if (p.image_url) {
+      imageHtml =
+        '<img src="' +
+        escHtml(p.image_url) +
+        '" alt="' +
+        escHtml(p.title) +
+        '" ' +
+        'class="w-full h-auto object-contain" ' +
+        "onerror=\"this.style.display='none';this.nextElementSibling.style.display='flex';\" />" +
+        '<div style="display:none;" ' +
+        'class="w-full h-full items-center justify-center bg-gradient-to-br from-dark-base to-dark-card">' +
+        '<span class="text-3xl font-bold gradient-text text-center px-6">' +
+        escHtml(p.title.split(":")[0]) +
+        "</span>" +
+        "</div>";
+    } else {
+      imageHtml =
+        '<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-dark-base to-dark-card">' +
+        '<span class="text-3xl font-bold gradient-text text-center px-6">' +
+        escHtml(p.title.split(":")[0]) +
+        "</span>" +
+        "</div>";
+    }
+
+    content.innerHTML =
+      // Image
+      '<div class="relative overflow-hidden rounded-t-2xl w-full">' +
+      imageHtml +
+      '<div class="absolute inset-0 bg-gradient-to-t from-dark-card via-transparent to-transparent pointer-events-none"></div>' +
+      "</div>" +
+      // Body
+      '<div class="p-7">' +
+      // Title row
+      '<div class="flex flex-wrap items-start justify-between gap-3 mb-4">' +
+      '<h2 class="text-2xl font-bold text-white leading-tight flex-1">' +
+      escHtml(p.title) +
+      "</h2>" +
+      '<div class="flex items-center gap-2 shrink-0">' +
+      (p.featured
+        ? '<span class="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">⭐ Featured</span>'
+        : "") +
+      statusHtml +
+      "</div>" +
+      "</div>" +
+      // Meta row
+      '<div class="flex items-center gap-4 text-xs text-gray-500 font-mono mb-5">' +
+      (p.publish_date
+        ? '<span><i class="fas fa-calendar mr-1"></i>' +
+          escHtml(p.publish_date) +
+          "</span>"
+        : "") +
+      "</div>" +
+      // Tags
+      '<div class="flex flex-wrap gap-2 mb-6">' +
+      tagsHtml +
+      "</div>" +
+      // Divider
+      '<div class="border-t border-dark-border mb-6"></div>' +
+      // Description
+      '<div class="text-gray-300 text-sm leading-relaxed mb-6 space-y-2 project-long-desc">' +
+      longDesc +
+      "</div>" +
+      // Links
+      (linksHtml
+        ? '<div class="border-t border-dark-border pt-6 flex flex-wrap gap-3">' +
+          linksHtml +
+          "</div>"
+        : "") +
+      "</div>";
+
+    // Show modal
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+
+    // Reset scroll
+    document.getElementById("modal-window").scrollTop = 0;
+
+    // Animate in
+    var win = document.getElementById("modal-window");
+    win.style.opacity = "0";
+    win.style.transform = "translateY(20px) scale(0.97)";
+    win.style.transition = "opacity 0.25s ease, transform 0.25s ease";
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        win.style.opacity = "1";
+        win.style.transform = "translateY(0) scale(1)";
+      });
+    });
+  }
+
+  function closeModal() {
+    var modal = document.getElementById("project-modal");
+    var win = document.getElementById("modal-window");
+    win.style.opacity = "0";
+    win.style.transform = "translateY(20px) scale(0.97)";
+    setTimeout(function () {
+      modal.style.display = "none";
+      document.body.style.overflow = "";
+      win.style.opacity = "";
+      win.style.transform = "";
+    }, 220);
+  }
+
+  // Close on Escape key
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeModal();
+  });
+
+  // Escape HTML helper
+  function escHtml(str) {
+    if (!str) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  /* ══════════════════════════════════════════
+   TAG FILTER
+══════════════════════════════════════════ */
+  var filterBtns = document.querySelectorAll(".filter-btn");
+  var cards = document.querySelectorAll(".project-card");
+
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      filterBtns.forEach(function (b) {
+        b.classList.remove(
+          "active",
+          "border-cyber-cyan",
+          "bg-cyber-cyan/10",
+          "text-cyber-cyan",
+        );
+        b.classList.add("border-dark-border", "text-gray-400");
+      });
+      this.classList.add(
+        "active",
+        "border-cyber-cyan",
+        "bg-cyber-cyan/10",
+        "text-cyber-cyan",
+      );
+      this.classList.remove("border-dark-border", "text-gray-400");
+
+      var filter = this.dataset.filter;
+      cards.forEach(function (card) {
+        var tags = card.dataset.tags ? card.dataset.tags.split(",") : [];
+        card.style.display =
+          filter === "all" || tags.includes(filter) ? "" : "none";
+      });
+    });
+  });
+</script>
+{% endblock %}

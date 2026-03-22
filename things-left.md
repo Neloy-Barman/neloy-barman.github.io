@@ -1,0 +1,4 @@
+- Fill in None Values ✅
+- Check if the logos get visible based on dark and light theme. ✅
+- Add Tags ✅
+- Deploy

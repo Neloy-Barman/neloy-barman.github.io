@@ -1,0 +1,1207 @@
+{# templates/pages/index.html #} {% extends "base.html" %} {% block content %}
+
+<!-- ═══════════════════ HERO ═══════════════════════════ -->
+<section
+  class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden"
+>
+  <!-- Layer 1: Neural Network Canvas -->
+  <canvas
+    id="neural-canvas"
+    class="absolute inset-0 w-full h-full pointer-events-none"
+    style="z-index: 0"
+  ></canvas>
+
+  <!-- Layer 2: Floating Agent Nodes -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="agent-node" style="top: 15%; left: 8%">
+      <div class="agent-node-ring"></div>
+      <div class="agent-node-core">
+        <i class="fas fa-brain text-cyber-cyan text-xs"></i>
+      </div>
+      <span class="agent-node-label">LLM</span>
+    </div>
+
+    <div class="agent-node" style="top: 25%; right: 9%">
+      <div class="agent-node-ring"></div>
+      <div class="agent-node-core">
+        <i class="fas fa-database text-cyber-purple text-xs"></i>
+      </div>
+      <span class="agent-node-label">RAG</span>
+    </div>
+
+    <div class="agent-node" style="bottom: 28%; left: 6%">
+      <div class="agent-node-ring"></div>
+      <div class="agent-node-core">
+        <i class="fas fa-microphone text-blue-400 text-xs"></i>
+      </div>
+      <span class="agent-node-label">Voice</span>
+    </div>
+
+    <div class="agent-node" style="bottom: 32%; right: 7%">
+      <div class="agent-node-ring"></div>
+      <div class="agent-node-core">
+        <i class="fas fa-tools text-emerald-400 text-xs"></i>
+      </div>
+      <span class="agent-node-label">Tools</span>
+    </div>
+
+    <div class="agent-node" style="top: 55%; left: 3%">
+      <div class="agent-node-ring"></div>
+      <div class="agent-node-core">
+        <i class="fas fa-memory text-amber-400 text-xs"></i>
+      </div>
+      <span class="agent-node-label">Memory</span>
+    </div>
+
+    <div class="agent-node" style="top: 12%; right: 22%">
+      <div class="agent-node-ring"></div>
+      <div class="agent-node-core">
+        <i class="fas fa-robot text-cyber-cyan text-xs"></i>
+      </div>
+      <span class="agent-node-label">Agent</span>
+    </div>
+
+    <div class="agent-node" style="bottom: 18%; left: 22%">
+      <div class="agent-node-ring"></div>
+      <div class="agent-node-core">
+        <i class="fas fa-cogs text-cyber-purple text-xs"></i>
+      </div>
+      <span class="agent-node-label">n8n</span>
+    </div>
+
+    <div class="agent-node" style="top: 42%; right: 4%">
+      <div class="agent-node-ring"></div>
+      <div class="agent-node-core">
+        <i class="fas fa-plug text-blue-400 text-xs"></i>
+      </div>
+      <span class="agent-node-label">API</span>
+    </div>
+
+    <!-- SVG Lines between nodes -->
+    <svg
+      class="absolute inset-0 w-full h-full"
+      id="node-connections"
+      style="z-index: 1"
+    >
+      <defs>
+        <linearGradient id="lineGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.0" />
+          <stop offset="50%" stop-color="#00d4ff" stop-opacity="0.3" />
+          <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.0" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- Layer 3: Glow Orbs -->
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+
+  <!-- Layer 4: Floating Code Snippets -->
+  <div class="code-float code-float-1 hidden lg:block">
+    <pre
+      class="text-xs font-mono"
+    ><span class="text-cyber-cyan">agent</span> = Agent(
+  llm=<span class="text-cyber-purple">GPT4o</span>,
+  tools=[<span class="text-emerald-400">search</span>, <span class="text-emerald-400">code</span>],
+  memory=<span class="text-amber-400">VectorDB</span>
+)</pre>
+  </div>
+  <div class="code-float code-float-2 hidden lg:block">
+    <pre
+      class="text-xs font-mono"
+    ><span class="text-cyber-purple">@workflow</span>
+<span class="text-blue-400">def</span> <span class="text-cyber-cyan">rag_pipeline</span>():
+  docs = <span class="text-emerald-400">retrieve</span>(query)
+  <span class="text-blue-400">return</span> llm.<span class="text-cyber-cyan">generate</span>(docs)</pre>
+  </div>
+  <div class="code-float code-float-3 hidden xl:block">
+    <pre
+      class="text-xs font-mono"
+    ><span class="text-gray-500"># Voice Agent</span>
+stt → llm → tts
+<span class="text-emerald-400">latency</span>: <span class="text-cyber-cyan">&lt;800ms</span></pre>
+  </div>
+
+  <!-- Layer 5: Scanline + Grid -->
+  <div class="hero-scanline pointer-events-none"></div>
+  <div
+    class="absolute inset-0 hero-grid pointer-events-none opacity-20"
+    style="z-index: 0"
+  ></div>
+
+  <!-- Hero Content -->
+  <div class="relative max-w-5xl mx-auto px-4 text-center" style="z-index: 10">
+    {% if profile.available_for_work %}
+    <div
+      class="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-sm font-medium mb-8"
+    >
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      Available for new opportunities
+    </div>
+    {% endif %}
+
+    <h1
+      class="hero-name text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-4"
+    >
+      Hi, I'm <span class="gradient-text">{{ profile.full_name }}</span>
+    </h1>
+
+    <div
+      class="hero-title text-xl sm:text-2xl font-mono mb-6"
+      style="min-height: 2.5rem"
+    >
+      <span id="typed-text" class="text-cyber-cyan"></span
+      ><span class="typed-cursor text-cyber-cyan">|</span>
+    </div>
+
+    <p
+      class="hero-tagline text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed"
+    >
+      {{ profile.tagline }}
+    </p>
+
+    <div class="hero-ctas flex flex-col sm:flex-row gap-4 justify-center mb-6">
+      <a
+        href="/projects/"
+        class="px-8 py-3 rounded-xl bg-gradient-to-r from-cyber-cyan to-cyber-purple text-white font-semibold hover:opacity-90 hover:scale-105 transition-all duration-200 shadow-glow"
+      >
+        View My Work
+      </a>
+      <a
+        href="/contact/"
+        class="px-8 py-3 rounded-xl border border-white/20 text-white font-semibold hover:border-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/5 hover:scale-105 transition-all duration-200"
+      >
+        Get In Touch
+      </a>
+    </div>
+
+    <div
+      class="hero-scroll flex flex-col items-center gap-1 text-gray-600 mb-8"
+    >
+      <span class="text-xs font-mono tracking-widest uppercase">scroll</span>
+      <i class="fas fa-chevron-down text-xs animate-bounce"></i>
+    </div>
+
+    <div class="hero-socials flex justify-center gap-3 flex-wrap">
+      {% for link in social_links %}
+      <a
+        href="{{ link.url }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="{{ link.platform }}"
+        style="width: 55px; height: 55px"
+        class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan/50 hover:bg-cyber-cyan/10 transition-all duration-200"
+      >
+        <span
+          class="iconify"
+          data-icon="{{ link.icon_class }}"
+          data-width="35"
+          data-height="35"
+        ></span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div
+    class="absolute bottom-0 left-0 right-0 border-t border-white/5 bg-dark-base/40 backdrop-blur-sm px-6 py-2"
+    style="z-index: 10"
+  >
+    <div
+      class="max-w-7xl mx-auto flex items-center gap-6 overflow-x-auto scrollbar-none text-xs font-mono text-gray-600"
+    >
+      <span class="flex items-center gap-1.5 shrink-0">
+        <span
+          class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"
+        ></span>
+        <span class="text-emerald-500">AGENT ACTIVE</span>
+      </span>
+      <span class="shrink-0">|</span>
+      <span class="shrink-0"
+        >LLM: <span class="text-cyber-cyan">GPT-4o</span></span
+      >
+      <span class="shrink-0">|</span>
+      <span class="shrink-0"
+        >Mode: <span class="text-cyber-purple">AGENTIC</span></span
+      >
+      <span class="shrink-0">|</span>
+      <span class="shrink-0"
+        >Tools:
+        <span class="text-amber-400">RAG · Voice · n8n · APIs</span></span
+      >
+      <span class="shrink-0">|</span>
+      <span class="shrink-0"
+        >Loop: <span class="text-blue-400">RUNNING ∞</span></span
+      >
+      <span class="shrink-0">|</span>
+      <span class="shrink-0 text-gray-700" id="hero-clock"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FEATURED PROJECTS ══════════════ -->
+{% if featured_projects %}
+<section class="py-20 border-t border-dark-border">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-end justify-between mb-12">
+      <div>
+        <p class="text-cyber-cyan font-mono text-sm mb-2">// featured work</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white">Projects</h2>
+      </div>
+      <a
+        href="/projects/"
+        class="text-cyber-cyan text-sm hover:underline font-mono"
+        >view all →</a
+      >
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for project in featured_projects %}
+      <article
+        class="project-card group relative rounded-2xl border border-dark-border overflow-hidden hover:border-cyber-cyan/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-glow slide-up bg-dark-card/40 cursor-pointer"
+        data-tags="{{ project.tags | map(attribute='slug') | join(',') }}"
+        data-id="{{ project.id }}"
+        onclick="openFeaturedModal({{ loop.index0 }})"
+      >
+        <!-- Badges -->
+        {% if project.featured %}
+        <div
+          class="absolute top-3 left-3 z-10 px-2 py-0.5 rounded-full text-xs bg-amber-500/20 text-amber-400 border border-amber-500/30 font-medium"
+        >
+          ⭐ Featured
+        </div>
+        {% endif %} {% if project.status == 'in-progress' %}
+        <div
+          class="absolute top-3 right-3 z-10 px-2 py-0.5 rounded-full text-xs bg-blue-500/20 text-blue-400 border border-blue-500/30"
+        >
+          In Progress
+        </div>
+        {% endif %}
+
+        <!-- Image -->
+        <div class="aspect-video overflow-hidden bg-dark-base relative">
+          <img
+            src="{{ project.image_url or 'https://placehold.co/800x450/0a0f1e/00d4ff?text=' + project.title }}"
+            alt="{{ project.title }}"
+            loading="lazy"
+            class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+            onerror="
+              this.style.display = 'none';
+              this.nextElementSibling.style.display = 'flex';
+            "
+          />
+          <!-- Fallback gradient with title -->
+          <div
+            class="absolute inset-0 items-center justify-center"
+            style="
+              display: none;
+              background: linear-gradient(135deg, #0a0f1e, #0f1629);
+            "
+          >
+            <span class="text-2xl font-bold gradient-text px-4 text-center"
+              >{{ project.title.split(':')[0] }}</span
+            >
+          </div>
+          <!-- Hover overlay -->
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-dark-base/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4"
+          >
+            <span
+              class="text-white text-sm font-medium flex items-center gap-2 bg-cyber-cyan/20 border border-cyber-cyan/40 px-4 py-1.5 rounded-full backdrop-blur-sm"
+            >
+              <i class="fas fa-expand-alt text-cyber-cyan"></i> View Details
+            </span>
+          </div>
+        </div>
+
+        <!-- Card Content -->
+        <div class="p-6">
+          <h2
+            class="font-bold text-white text-lg leading-tight mb-2 group-hover:text-cyber-cyan transition-colors"
+          >
+            {{ project.title }}
+          </h2>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-3">
+            {{ project.short_desc }}
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            {% for tag in project.tags %}
+            <span
+              class="text-xs px-2 py-0.5 rounded-md bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/20"
+              >{{ tag.name }}</span
+            >
+            {% endfor %}
+          </div>
+          {# ── Collect available links ──────────────────────────────────── #}
+          {% set links = [] %} {% if project.github_url %} {% set _ =
+          links.append({ 'url': project.github_url, 'icon': 'fab fa-github',
+          'label': 'Source', 'class': 'text-gray-400 hover:text-white' }) %} {%
+          endif %} {% if project.workflow_url %} {% set _ = links.append({
+          'url': project.workflow_url, 'icon': 'fas fa-project-diagram',
+          'label': 'Workflow', 'class': 'text-gray-400 hover:text-white' }) %}
+          {% endif %} {% if project.dashboard_url %} {% set _ = links.append({
+          'url': project.dashboard_url, 'icon': 'fas fa-chart-bar', 'label':
+          'Dashboard', 'class': 'text-gray-400 hover:text-white' }) %} {% endif
+          %} {% if project.integration_url %} {% set _ = links.append({ 'url':
+          project.integration_url, 'icon': 'fas fa-plug', 'label':
+          'Integration', 'class': 'text-gray-400 hover:text-white' }) %} {%
+          endif %} {% if project.demo_url %} {% set _ = links.append({ 'url':
+          project.demo_url, 'icon': 'fas fa-external-link-alt', 'label': 'Live
+          Demo', 'class': 'text-cyber-cyan hover:text-white' }) %} {% endif %}
+          {# ── Render based on count ────────────────────────────────────── #}
+          {% if links | length > 0 %}
+          <div
+            class="flex items-center justify-between gap-2 pt-4 border-t border-dark-border"
+            onclick="event.stopPropagation()"
+          >
+            {# Only 1 link — place on left #} {% if links | length == 1 %}
+            <a
+              href="{{ links[0].url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-1.5 text-sm {{ links[0].class }} transition-colors"
+            >
+              <i class="{{ links[0].icon }}"></i> {{ links[0].label }}
+            </a>
+
+            {# 2 links — one left, one right #} {% elif links | length == 2 %}
+            <a
+              href="{{ links[0].url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-1.5 text-sm {{ links[0].class }} transition-colors"
+            >
+              <i class="{{ links[0].icon }}"></i> {{ links[0].label }}
+            </a>
+            <a
+              href="{{ links[1].url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-1.5 text-sm {{ links[1].class }} transition-colors"
+            >
+              <i class="{{ links[1].icon }}"></i> {{ links[1].label }}
+            </a>
+
+            {# 3+ links — first left, last right, rest in middle #} {% else %}
+            {# Left — first link #}
+            <a
+              href="{{ links[0].url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-1.5 text-sm {{ links[0].class }} transition-colors"
+            >
+              <i class="{{ links[0].icon }}"></i> {{ links[0].label }}
+            </a>
+
+            {# Middle — everything except first and last #}
+            <div class="flex items-center gap-4 flex-wrap justify-center">
+              {% for link in links[1:-1] %}
+              <a
+                href="{{ link.url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-1.5 text-sm {{ link.class }} transition-colors"
+              >
+                <i class="{{ link.icon }}"></i> {{ link.label }}
+              </a>
+              {% endfor %}
+            </div>
+
+            {# Right — last link #}
+            <a
+              href="{{ links[-1].url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-1.5 text-sm {{ links[-1].class }} transition-colors"
+            >
+              <i class="{{ links[-1].icon }}"></i> {{ links[-1].label }}
+            </a>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     FEATURED PROJECTS MODAL
+═══════════════════════════════════════════════════════ -->
+<div
+  id="featured-project-modal"
+  class="fixed inset-0 z-50 flex items-center justify-center p-4"
+  style="display: none"
+>
+  <!-- Backdrop -->
+  <div
+    class="absolute inset-0 bg-dark-base/80 backdrop-blur-md"
+    onclick="closeFeaturedModal()"
+  ></div>
+
+  <!-- Modal Window -->
+  <div
+    id="featured-modal-window"
+    class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl border border-dark-border bg-dark-card shadow-2xl shadow-black/50"
+    style="scrollbar-width: thin"
+  >
+    <!-- Close Button -->
+    <button
+      onclick="closeFeaturedModal()"
+      class="absolute top-4 right-4 z-10 w-8 h-8 rounded-lg bg-dark-base/80 border border-dark-border flex items-center justify-center text-gray-400 hover:text-white hover:border-cyber-cyan/50 transition-all backdrop-blur-sm"
+      aria-label="Close"
+    >
+      <i class="fas fa-times text-sm"></i>
+    </button>
+
+    <!-- Injected content -->
+    <div id="featured-modal-content"></div>
+  </div>
+</div>
+
+<!-- Featured Projects Data -->
+<!-- Featured Projects Data -->
+<script id="featured-projects-data" type="application/json">
+  [
+    {% for project in featured_projects %}
+    {
+      "title":           {{ project.title | tojson }},
+      "short_desc":      {{ project.short_desc | tojson }},
+      "long_desc":       {{ (project.long_desc or '') | tojson }},
+      "image_url":       {{ (project.image_url or '') | tojson }},
+      "github_url":      {{ (project.github_url or '') | tojson }},
+      "demo_url":        {{ (project.demo_url or '') | tojson }},
+      "workflow_url":    {{ (project.workflow_url or '') | tojson }},
+      "dashboard_url":   {{ (project.dashboard_url or '') | tojson }},
+      "integration_url": {{ (project.integration_url or '') | tojson }},
+      "status":          {{ (project.status or 'completed') | tojson }},
+      "featured":        {{ 'true' if project.featured else 'false' }},
+      "publish_date":    {{ (project.publish_date or '') | tojson }},
+      "tags": [{% for tag in project.tags %}{{ tag.name | tojson }}{% if not loop.last %},{% endif %}{% endfor %}]
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+</script>
+
+<script>
+  /* ── Data ──────────────────────────────────────────────────────────── */
+  var FEATURED_PROJECTS = [];
+  try {
+    FEATURED_PROJECTS = JSON.parse(
+      document.getElementById("featured-projects-data").textContent,
+    );
+  } catch (e) {
+    console.error("Featured projects data parse error:", e);
+  }
+
+  /* ── Helpers ───────────────────────────────────────────────────────── */
+
+  function applyInline(text) {
+    return (
+      text
+        // Inline code
+        .replace(
+          /`([^`]+)`/g,
+          '<code class="px-1.5 py-0.5 rounded bg-dark-base text-cyber-cyan font-mono text-xs border border-dark-border">\$1</code>',
+        )
+        // Bold + Italic
+        .replace(
+          /\*\*\*(.*?)\*\*\*/g,
+          '<strong class="text-white font-semibold"><em>\$1</em></strong>',
+        )
+        // Bold
+        .replace(
+          /\*\*(.*?)\*\*/g,
+          '<strong class="text-white font-semibold">\$1</strong>',
+        )
+        // Italic
+        .replace(/\*(.*?)\*/g, '<em class="text-gray-200 italic">\$1</em>')
+        // Links
+        .replace(
+          /$$([^$$]+)\]\(([^)]+)\)/g,
+          '<a href="\$2" target="_blank" rel="noopener noreferrer" class="text-cyber-cyan underline underline-offset-2 hover:text-white transition-colors">\$1</a>',
+        )
+    );
+  }
+
+  // Escape HTML helper
+  function fpEscHtml(str) {
+    if (!str) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function fpParseMarkdown(text) {
+    if (!text) return "";
+
+    var lines = text.split("\n");
+    var html = "";
+    var inCodeBlock = false;
+    var codeContent = "";
+    var listStack = [];
+
+    function getIndent(line) {
+      return line.match(/^(\s*)/)[1].length;
+    }
+
+    function closeAllLists() {
+      while (listStack.length > 0) {
+        var top = listStack.pop();
+        html += top.type === "ul" ? "</ul>" : "</ol>";
+      }
+    }
+
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i];
+      var trimmed = line.trim();
+
+      // ── Code block ────────────────────────────────────────────────
+      if (trimmed.startsWith("```")) {
+        if (!inCodeBlock) {
+          inCodeBlock = true;
+          codeContent = "";
+        } else {
+          inCodeBlock = false;
+          html +=
+            '<pre class="bg-dark-base border border-dark-border rounded-lg p-4 overflow-x-auto my-3">' +
+            '<code class="text-cyber-cyan font-mono text-xs">' +
+            fpEscHtml(codeContent.trim()) +
+            "</code></pre>";
+        }
+        continue;
+      }
+
+      if (inCodeBlock) {
+        codeContent += line + "\n";
+        continue;
+      }
+
+      var indent = getIndent(line);
+      var isUL = trimmed.match(/^[-*+] /);
+      var isOL = trimmed.match(/^(\d+)\. /);
+
+      // ── List items ────────────────────────────────────────────────
+      if (isUL || isOL) {
+        var listType = isUL ? "ul" : "ol";
+
+        if (listStack.length === 0) {
+          // Brand new top-level list
+          html +=
+            listType === "ul"
+              ? '<ul class="space-y-1 my-3">'
+              : '<ol class="space-y-1 my-3">';
+          listStack.push({ type: listType, indent: indent });
+        } else {
+          var top = listStack[listStack.length - 1];
+
+          if (indent > top.indent) {
+            // Going DEEPER — strip last </li>, open nested list inside it
+            if (html.endsWith("</div></li>")) {
+              html = html.slice(0, -11); // remove </div></li>
+              // reopen with nested list below the text div
+              html +=
+                listType === "ul"
+                  ? '</div><ul class="space-y-1 mt-2 ml-5">'
+                  : '</div><ol class="space-y-1 mt-2 ml-5">';
+            }
+            listStack.push({ type: listType, indent: indent });
+          } else if (indent < top.indent) {
+            // Going UP — close deeper lists
+            while (
+              listStack.length > 0 &&
+              listStack[listStack.length - 1].indent > indent
+            ) {
+              var closing = listStack.pop();
+              html += closing.type === "ul" ? "</ul></li>" : "</ol></li>";
+            }
+          }
+          // Same indent → just continue
+        }
+
+        // ── Render list item
+        // Use flex-col so nested list appears BELOW the text, not beside it
+        if (isUL) {
+          html +=
+            '<li class="flex flex-col">' +
+            '<div class="flex items-start gap-2">' +
+            '<span class="text-cyber-cyan mt-1 shrink-0">▸</span>' +
+            "<span>" +
+            applyInline(trimmed.slice(2)) +
+            "</span>" +
+            "</div>" +
+            "</li>";
+        } else {
+          var olNum = isOL[1];
+          html +=
+            '<li class="flex flex-col text-gray-300">' +
+            '<div class="flex items-start gap-2">' +
+            '<span class="text-cyber-cyan font-mono text-sm shrink-0 mt-0.5 min-w-[1.2rem]">' +
+            olNum +
+            ".</span>" +
+            "<span>" +
+            applyInline(trimmed.replace(/^\d+\. /, "")) +
+            "</span>" +
+            "</div>" +
+            "</li>";
+        }
+
+        continue;
+      }
+
+      // ── Not a list item — close all open lists ─────────────────────
+      closeAllLists();
+
+      // ── Headings ───────────────────────────────────────────────────
+      if (trimmed.startsWith("### ")) {
+        html +=
+          '<h3 class="text-base font-bold text-cyber-cyan mt-4 mb-2">' +
+          applyInline(trimmed.slice(4)) +
+          "</h3>";
+      } else if (trimmed.startsWith("## ")) {
+        html +=
+          '<h2 class="text-lg font-bold text-white mt-5 mb-2">' +
+          applyInline(trimmed.slice(3)) +
+          "</h2>";
+      } else if (trimmed.startsWith("# ")) {
+        html +=
+          '<h1 class="text-xl font-bold text-white mt-6 mb-3">' +
+          applyInline(trimmed.slice(2)) +
+          "</h1>";
+
+        // ── Horizontal rule ────────────────────────────────────────────
+      } else if (trimmed === "---") {
+        html += '<hr class="border-dark-border my-4">';
+
+        // ── Blockquote ─────────────────────────────────────────────────
+      } else if (trimmed.startsWith("> ")) {
+        html +=
+          '<blockquote class="border-l-2 border-cyber-cyan/50 pl-4 italic text-gray-400 my-2">' +
+          applyInline(trimmed.slice(2)) +
+          "</blockquote>";
+
+        // ── Empty line ─────────────────────────────────────────────────
+      } else if (trimmed === "") {
+        html += "";
+
+        // ── Paragraph ──────────────────────────────────────────────────
+      } else {
+        html +=
+          '<p class="text-gray-300 leading-relaxed my-2">' +
+          applyInline(trimmed) +
+          "</p>";
+      }
+    }
+
+    closeAllLists();
+    return html;
+  }
+
+  /* ── Open ──────────────────────────────────────────────────────────── */
+  function openFeaturedModal(index) {
+    var p = FEATURED_PROJECTS[index];
+    if (!p) return;
+
+    var longDesc = fpParseMarkdown(p.long_desc || p.short_desc || "");
+
+    var tagsHtml = p.tags
+      .map(function (t) {
+        return (
+          '<span class="text-xs px-2 py-1 rounded-md bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/20">' +
+          fpEscHtml(t) +
+          "</span>"
+        );
+      })
+      .join("");
+
+    var statusHtml =
+      p.status === "in-progress"
+        ? '<span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">In Progress</span>'
+        : '<span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Completed</span>';
+
+    var linksHtml = "";
+    var linksHtml = "";
+    if (p.github_url) {
+      linksHtml +=
+        '<a href="' +
+        fpEscHtml(p.github_url) + // ✅
+        '" target="_blank" rel="noopener noreferrer" ' +
+        'class="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-dark-border ' +
+        "text-gray-300 hover:text-white hover:border-cyber-cyan/50 hover:bg-cyber-cyan/5 " +
+        'transition-all text-sm font-medium">' +
+        '<i class="fab fa-github"></i> View Source Code</a>';
+    }
+
+    if (p.workflow_url) {
+      linksHtml +=
+        '<a href="' +
+        fpEscHtml(p.workflow_url) + // ✅
+        '" target="_blank" rel="noopener noreferrer" ' +
+        'class="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-dark-border ' +
+        "text-gray-300 hover:text-white hover:border-cyber-cyan/50 hover:bg-cyber-cyan/5 " +
+        'transition-all text-sm font-medium">' +
+        '<i class="fas fa-project-diagram"></i> View Workflow</a>';
+    }
+
+    if (p.dashboard_url) {
+      linksHtml +=
+        '<a href="' +
+        fpEscHtml(p.dashboard_url) + // ✅
+        '" target="_blank" rel="noopener noreferrer" ' +
+        'class="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-dark-border ' +
+        "text-gray-300 hover:text-white hover:border-cyber-cyan/50 hover:bg-cyber-cyan/5 " +
+        'transition-all text-sm font-medium">' +
+        '<i class="fas fa-chart-bar"></i> View Dashboard</a>';
+    }
+
+    if (p.integration_url) {
+      linksHtml +=
+        '<a href="' +
+        fpEscHtml(p.integration_url) + // ✅
+        '" target="_blank" rel="noopener noreferrer" ' +
+        'class="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-dark-border ' +
+        "text-gray-300 hover:text-white hover:border-cyber-cyan/50 hover:bg-cyber-cyan/5 " +
+        'transition-all text-sm font-medium">' +
+        '<i class="fas fa-plug"></i> View Integration</a>';
+    }
+
+    if (p.demo_url) {
+      linksHtml +=
+        '<a href="' +
+        fpEscHtml(p.demo_url) + // ✅
+        '" target="_blank" rel="noopener noreferrer" ' +
+        'class="flex items-center gap-2 px-5 py-2.5 rounded-xl ' +
+        "bg-gradient-to-r from-cyber-cyan to-cyber-purple " +
+        'text-white hover:opacity-90 transition-all text-sm font-semibold shadow-glow">' +
+        '<i class="fas fa-external-link-alt"></i> Live Demo</a>';
+    }
+
+    // Image or gradient fallback
+    var imageHtml = "";
+    if (p.image_url) {
+      imageHtml =
+        '<img src="' +
+        fpEscHtml(p.image_url) +
+        '" alt="' +
+        fpEscHtml(p.title) +
+        '" ' +
+        'class="w-full h-auto object-contain" ' +
+        "onerror=\"this.style.display='none';this.nextElementSibling.style.display='flex';\" />" +
+        '<div style="display:none;" ' +
+        'class="w-full h-full items-center justify-center bg-gradient-to-br from-dark-base to-dark-card">' +
+        '<span class="text-3xl font-bold gradient-text text-center px-6">' +
+        fpEscHtml(p.title.split(":")[0]) +
+        "</span>" +
+        "</div>";
+    } else {
+      imageHtml =
+        '<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-dark-base to-dark-card">' +
+        '<span class="text-3xl font-bold gradient-text text-center px-6">' +
+        fpEscHtml(p.title.split(":")[0]) +
+        "</span>" +
+        "</div>";
+    }
+
+    document.getElementById("featured-modal-content").innerHTML =
+      '<div class="relative overflow-hidden rounded-t-2xl">' +
+      imageHtml +
+      '<div class="absolute inset-0 bg-gradient-to-t from-dark-card via-transparent to-transparent pointer-events-none"></div></div>' +
+      '<div class="p-7">' +
+      '<div class="flex flex-wrap items-start justify-between gap-3 mb-4">' +
+      '<h2 class="text-2xl font-bold text-white leading-tight flex-1">' +
+      fpEscHtml(p.title) +
+      "</h2>" +
+      '<div class="flex items-center gap-2 shrink-0">' +
+      (p.featured
+        ? '<span class="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">⭐ Featured</span>'
+        : "") +
+      statusHtml +
+      "</div>" +
+      "</div>" +
+      '<div class="flex items-center gap-4 text-xs text-gray-500 font-mono mb-5">' +
+      (p.publish_date
+        ? '<span><i class="fas fa-calendar mr-1"></i>' +
+          fpEscHtml(p.publish_date) +
+          "</span>"
+        : "") +
+      "</div>" +
+      '<div class="flex flex-wrap gap-2 mb-6">' +
+      tagsHtml +
+      "</div>" +
+      '<div class="border-t border-dark-border mb-6"></div>' +
+      '<div class="text-gray-300 text-sm leading-relaxed mb-6 space-y-2">' +
+      longDesc +
+      "</div>" +
+      (linksHtml
+        ? '<div class="border-t border-dark-border pt-6 flex flex-wrap gap-3">' +
+          linksHtml +
+          "</div>"
+        : "") +
+      "</div>";
+
+    var modal = document.getElementById("featured-project-modal");
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+
+    var win = document.getElementById("featured-modal-window");
+    win.scrollTop = 0;
+    win.style.opacity = "0";
+    win.style.transform = "translateY(20px) scale(0.97)";
+    win.style.transition = "opacity 0.25s ease, transform 0.25s ease";
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        win.style.opacity = "1";
+        win.style.transform = "translateY(0) scale(1)";
+      });
+    });
+  }
+
+  /* ── Close ─────────────────────────────────────────────────────────── */
+  function closeFeaturedModal() {
+    var modal = document.getElementById("featured-project-modal");
+    var win = document.getElementById("featured-modal-window");
+    win.style.opacity = "0";
+    win.style.transform = "translateY(20px) scale(0.97)";
+    setTimeout(function () {
+      modal.style.display = "none";
+      document.body.style.overflow = "";
+      win.style.opacity = "";
+      win.style.transform = "";
+    }, 220);
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeFeaturedModal();
+  });
+</script>
+{% endif %}
+
+<!-- ═══════════════════ FEATURED POSTS ════════════════ -->
+{% if featured_posts %}
+<section class="py-20 border-t border-dark-border bg-dark-card/20">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-end justify-between mb-12">
+      <div>
+        <p class="text-cyber-purple font-mono text-sm mb-2">
+          // latest thinking
+        </p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white">Articles</h2>
+      </div>
+      <a href="/blog/" class="text-cyber-cyan text-sm hover:underline font-mono"
+        >read all →</a
+      >
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {% for post in featured_posts[:4] %}
+      <article
+        data-url="{{ post.post_url if post.post_url else '' }}"
+        data-title="{{ post.title }}"
+        data-date="{{ post.publish_date }}"
+        data-read-time="{{ post.read_time }}"
+        data-content="{{ post.content | e }}"
+        onclick="handlePostClick(this)"
+        class="group cursor-pointer p-6 rounded-2xl border border-dark-border hover:border-cyber-purple/40 transition-all duration-300 hover:-translate-y-1 slide-up bg-dark-card/60"
+      >
+        <div class="flex items-start gap-4">
+          <div
+            class="shrink-0 w-12 h-12 rounded-xl bg-cyber-purple/20 flex items-center justify-center"
+          >
+            <i class="fas fa-file-alt text-cyber-purple"></i>
+          </div>
+          <div>
+            <h3
+              class="font-bold text-white group-hover:text-cyber-cyan transition-colors leading-tight mb-2"
+            >
+              {{ post.title }}
+            </h3>
+            <p class="text-gray-400 text-sm line-clamp-2">{{ post.excerpt }}</p>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ── Modal ─────────────────────────────────────────────────────────── -->
+<div
+  id="post-modal"
+  onclick="closeModal(event)"
+  class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+>
+  <div
+    class="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-dark-card border border-dark-border rounded-2xl shadow-2xl flex flex-col"
+    onclick="event.stopPropagation()"
+  >
+    <!-- Modal header -->
+    <div
+      class="sticky top-0 z-10 flex items-start justify-between gap-4 p-6 bg-dark-card border-b border-dark-border"
+    >
+      <div>
+        <div
+          id="modal-meta"
+          class="flex items-center gap-3 text-xs text-gray-500 mb-2"
+        ></div>
+        <h2
+          id="modal-title"
+          class="text-lg font-bold text-white leading-tight"
+        ></h2>
+      </div>
+      <button
+        onclick="closeModalBtn()"
+        class="shrink-0 w-8 h-8 rounded-lg border border-dark-border flex items-center justify-center text-gray-500 hover:text-white hover:border-cyber-purple/50 transition-all mt-0.5"
+        aria-label="Close"
+      >
+        <i class="fas fa-xmark text-sm"></i>
+      </button>
+    </div>
+
+    <!-- Modal body -->
+    <div
+      id="modal-content"
+      class="p-6 text-gray-300 text-sm leading-relaxed prose prose-invert prose-headings:text-white prose-a:text-cyber-cyan max-w-none"
+    ></div>
+  </div>
+</div>
+{% endif %}
+
+<script>
+  function handlePostClick(card) {
+    const url = card.dataset.url;
+
+    // ── Navigate if post_url exists ─────────────────────────────────────
+    if (url) {
+      window.open(url, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    // ── Otherwise open modal ────────────────────────────────────────────
+    const title = card.dataset.title;
+    const date = card.dataset.date;
+    const readTime = card.dataset.readTime;
+    const content = card.dataset.content;
+
+    document.getElementById("modal-title").textContent = title;
+    document.getElementById("modal-meta").innerHTML = `
+      <span>${date}</span>
+      <span>·</span>
+      <span>${readTime} min read</span>
+    `;
+    document.getElementById("modal-content").innerHTML = content;
+
+    const modal = document.getElementById("post-modal");
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal(event) {
+    if (event.target === document.getElementById("post-modal")) {
+      closeModalBtn();
+    }
+  }
+
+  function closeModalBtn() {
+    const modal = document.getElementById("post-modal");
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+    document.body.style.overflow = "";
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModalBtn();
+  });
+</script>
+
+<!-- ═══════════════════ TESTIMONIALS ══════════════════
+{% if featured_testimonials %}
+<section class="py-20 border-t border-dark-border">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <p class="text-cyber-cyan font-mono text-sm mb-2">// what others say</p>
+      <h2 class="text-3xl sm:text-4xl font-bold text-white">Testimonials</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for t in featured_testimonials %}
+      <blockquote
+        class="p-6 rounded-2xl border border-dark-border bg-dark-card/60 hover:border-cyber-cyan/30 transition-all duration-300 slide-up"
+      >
+        <div class="flex gap-1 mb-4">
+          {% for i in range(t.rating) %}<i
+            class="fas fa-star text-amber-400 text-sm"
+          ></i
+          >{% endfor %}
+        </div>
+        <p class="text-gray-300 text-sm leading-relaxed mb-6 italic">
+          "{{ t.content }}"
+        </p>
+        <footer class="flex items-center gap-3">
+          <img
+            src="{{ t.author_avatar }}"
+            alt="{{ t.author_name }}"
+            loading="lazy"
+            class="w-10 h-10 rounded-full object-contain"
+            onerror="
+              this.src = 'https://placehold.co/40x40/0a0f1e/00d4ff?text=T'
+            "
+          />
+          <div>
+            <div class="font-semibold text-white text-sm">
+              {{ t.author_name }}
+            </div>
+            <div class="text-gray-500 text-xs">
+              {{ t.author_title }}{% if t.author_company %}, {{ t.author_company
+              }}{% endif %}
+            </div>
+          </div>
+        </footer>
+      </blockquote>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %} -->
+
+<!-- ═══════════════════ CTA ════════════════════════════ -->
+<section class="py-24 border-t border-dark-border relative overflow-hidden">
+  <div class="absolute inset-0 grid-bg opacity-10 pointer-events-none"></div>
+  <div class="max-w-2xl mx-auto px-4 text-center relative z-10">
+    <p class="text-cyber-cyan font-mono text-sm mb-4">
+      // let's build something
+    </p>
+    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">
+      Ready to work together?
+    </h2>
+    <p class="text-gray-400 mb-8 leading-relaxed">
+      Open to AI projects, agentic system design, and collaborations on
+      cutting-edge research.
+    </p>
+    <a
+      href="/contact/"
+      class="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-cyber-cyan to-cyber-purple text-white font-semibold hover:opacity-90 hover:scale-105 transition-all duration-200 shadow-glow"
+    >
+      <i class="fas fa-paper-plane"></i> Let's Talk
+    </a>
+  </div>
+</section>
+
+{% endblock %} {% block extra_scripts %}
+<script>
+  /* Typing Effect */
+  (function () {
+    var roles = [
+      "Agentic AI Engineer",
+      "Automation Specialist",
+      "Chatbot Developer",
+    ];
+    var ri = 0,
+      ci = 0,
+      deleting = false;
+
+    function tick() {
+      var el = document.getElementById("typed-text");
+      if (!el) return;
+
+      var word = roles[ri];
+
+      el.textContent = deleting ? word.slice(0, ci--) : word.slice(0, ci++);
+
+      // Finished typing → pause, then start deleting
+      if (!deleting && ci > word.length) {
+        deleting = true;
+        ci = word.length; // ← reset to exact length before deleting starts
+        return setTimeout(tick, 1800);
+      }
+
+      // Finished deleting → move to next word with a short pause
+      if (deleting && ci < 0) {
+        deleting = false;
+        ci = 0; // ← fix: reset before next word starts typing
+        ri = (ri + 1) % roles.length;
+        return setTimeout(tick, 500); // ← brief pause between words
+      }
+
+      setTimeout(tick, deleting ? 45 : 85);
+    }
+
+    setTimeout(tick, 1000);
+  })();
+
+  /* Hero Entrance Stagger */
+  (function () {
+    var items = [
+      [".hero-badge", 150],
+      [".hero-name", 300],
+      [".hero-title", 500],
+      [".hero-tagline", 650],
+      [".hero-ctas", 800],
+      [".hero-scroll", 950],
+      [".hero-socials", 1050],
+    ];
+    items.forEach(function (pair) {
+      var el = document.querySelector(pair[0]);
+      if (!el) return;
+      el.style.opacity = "0";
+      el.style.transform = "translateY(22px)";
+      el.style.transition = "opacity 0.65s ease, transform 0.65s ease";
+      setTimeout(function () {
+        el.style.opacity = "1";
+        el.style.transform = "translateY(0)";
+      }, pair[1]);
+    });
+  })();
+
+  /* Agent Node SVG Connections */
+  setTimeout(function () {
+    var svg = document.getElementById("node-connections");
+    var nodes = document.querySelectorAll(".agent-node");
+    if (!svg || nodes.length < 2) return;
+    var pairs = [
+      [0, 1],
+      [1, 5],
+      [0, 2],
+      [2, 6],
+      [3, 4],
+      [3, 1],
+      [6, 4],
+      [5, 7],
+      [7, 3],
+    ];
+    pairs.forEach(function (pair) {
+      var a = pair[0],
+        b = pair[1];
+      if (!nodes[a] || !nodes[b]) return;
+      var ra = nodes[a].getBoundingClientRect();
+      var rb = nodes[b].getBoundingClientRect();
+      var sa = svg.getBoundingClientRect();
+      var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", ra.left + ra.width / 2 - sa.left);
+      line.setAttribute("y1", ra.top + ra.height / 2 - sa.top);
+      line.setAttribute("x2", rb.left + rb.width / 2 - sa.left);
+      line.setAttribute("y2", rb.top + rb.height / 2 - sa.top);
+      line.setAttribute("stroke", "url(#lineGrad1)");
+      line.setAttribute("stroke-width", "1");
+      line.classList.add("svg-connection");
+      svg.appendChild(line);
+    });
+  }, 500);
+
+  /* Live Clock */
+  (function () {
+    var el = document.getElementById("hero-clock");
+    if (!el) return;
+    function update() {
+      el.textContent = new Date().toLocaleTimeString("en-US", {
+        hour12: false,
+      });
+    }
+    update();
+    setInterval(update, 1000);
+  })();
+</script>
+{% endblock %}

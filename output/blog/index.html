@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="en" class="dark" data-theme="dark">
+ <head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>Blog &amp; Articles | Neloy Barman</title>
+<meta name="description" content="Technical articles on LLMs, Voice AI, and Agentic systems." />
+<meta name="author" content="Neloy Barman" />
+<meta name="keywords" content="n8n, Agentic AI, AI Automation, Chatbot, Voice AI, Langchain, Langgraph, Python" />
+<link rel="canonical" href="https://neloy-barman.github.io//blog/" />
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Blog &amp; Articles" />
+<meta property="og:description" content="Technical articles on LLMs, Voice AI, and Agentic systems." />
+<meta property="og:url" content="https://neloy-barman.github.io//blog/" />
+<meta
+ property="og:image"
+ content="https://neloy-barman.github.io/"
+/>
+<meta property="og:site_name" content="Neloy Barman" />
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Blog &amp; Articles" />
+<meta name="twitter:description" content="Technical articles on LLMs, Voice AI, and Agentic systems." />
+<meta
+ name="twitter:image"
+ content="https://neloy-barman.github.io/"
+/>
+<meta name="twitter:site" content="" />
+<!-- JSON-LD -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Neloy Barman",
+    "jobTitle": "Agentic AI Engineer",
+    "email": "neloycareer018@gmail.com",
+    "url": "https://neloy-barman.github.io/"
+  }
+</script>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+ href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+ rel="stylesheet"
+/>
+<!-- Font Awesome -->
+<link
+ rel="stylesheet"
+ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "cyber-cyan": "#00d4ff",
+          "cyber-purple": "#7c3aed",
+          "dark-base": "#0a0f1e",
+          "dark-card": "#0f1629",
+          "dark-border": "#1e2d4a",
+        },
+        fontFamily: {
+          mono: ["JetBrains Mono", "monospace"],
+          sans: ["Inter", "system-ui", "sans-serif"],
+        },
+      },
+    },
+  };
+</script>
+<!-- Main CSS -->
+<link rel="stylesheet" href="/static/css/main.css" />
+ <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"
+    ></script>
+ </head>
+ <body
+ class="bg-dark-base text-gray-100 font-sans antialiased transition-colors duration-300"
+ >
+ <!-- Skip to content -->
+ <a
+ href="#main-content"
+ class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-cyber-cyan focus:text-dark-base focus:rounded-lg focus:font-semibold"
+ >
+ Skip to content
+ </a>
+ <!-- ── Global Neural Background (all pages) ── -->
+ <canvas
+ id="neural-canvas"
+ style="
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ pointer-events: none;
+ z-index: 0;
+ opacity: 0.18;
+ "
+ ></canvas>
+ <!-- ── Global Glow Orbs (all pages) ── -->
+ <div class="global-orb global-orb-1"></div>
+ <div class="global-orb global-orb-2"></div>
+ <!-- ── Global Grid Background ── -->
+ <div
+ style="
+ position: fixed;
+ inset: 0;
+ pointer-events: none;
+ z-index: 0;
+ opacity: 0.06;
+ background-image:
+ linear-gradient(rgba(0, 212, 255, 0.4) 1px, transparent 1px),
+ linear-gradient(90deg, rgba(0, 212, 255, 0.4) 1px, transparent 1px);
+ background-size: 60px 60px;
+ "
+ ></div>
+<nav
+ class="fixed top-0 left-0 right-0 z-50 nav-glass"
+ role="navigation"
+ aria-label="Main navigation"
+>
+ <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+ <div class="flex items-center justify-between h-16">
+ <!-- Logo -->
+ <a href="/" class="flex items-center gap-2 group" aria-label="Home">
+ <div
+ class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyber-cyan to-cyber-purple flex items-center justify-center text-white font-mono font-bold text-sm group-hover:scale-110 transition-transform"
+ >
+ N
+ </div>
+ <span
+ class="font-mono font-semibold text-white text-sm hidden sm:block"
+ >
+ Neloy Barman
+ </span>
+ </a>
+ <!-- Desktop Nav -->
+ <div class="hidden md:flex items-center gap-1">
+ <a
+ href="/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ Home
+ </a>
+ <a
+ href="/about/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ About
+ </a>
+ <a
+ href="/experience/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ Experience
+ </a>
+ <a
+ href="/education/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ Education
+ </a>
+ <a
+ href="/skills/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ Skills
+ </a>
+ <a
+ href="/projects/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ Projects
+ </a>
+ <a
+ href="/blog/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 nav-link-active"
+ aria-current="page"
+ >
+ Blog
+ </a>
+ <a
+ href="/certifications/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ Certifications
+ </a>
+ <a
+ href="/contact/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ Contact
+ </a>
+ <a
+ href="/resume/"
+ class="ml-3 px-4 py-2 rounded-lg text-sm font-semibold border border-cyber-cyan text-cyber-cyan hover:bg-cyber-cyan hover:text-dark-base transition-all duration-200"
+ aria-label="View Resume"
+ >
+ Resume
+ </a>
+ </div>
+ <!-- Theme toggle + Mobile menu button -->
+ <div class="flex items-center gap-3">
+ <button
+ id="theme-toggle"
+ aria-label="Toggle theme"
+ class="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-all"
+ >
+ <i class="fas fa-sun hidden" id="icon-light"></i>
+ <i class="fas fa-moon" id="icon-dark"></i>
+ </button>
+ <button
+ id="mobile-menu-btn"
+ aria-label="Open menu"
+ aria-expanded="false"
+ class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-all"
+ >
+ <i class="fas fa-bars" id="menu-icon-open"></i>
+ <i class="fas fa-times hidden" id="menu-icon-close"></i>
+ </button>
+ </div>
+ </div>
+ </div>
+ <!-- Mobile Menu -->
+ <div
+ id="mobile-menu"
+ class="hidden md:hidden border-t border-dark-border bg-dark-base/95 backdrop-blur"
+ >
+ <div class="px-4 py-3 space-y-1">
+ <a
+ href="/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ Home
+ </a>
+ <a
+ href="/about/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ About
+ </a>
+ <a
+ href="/experience/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ Experience
+ </a>
+ <a
+ href="/education/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ Education
+ </a>
+ <a
+ href="/skills/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ Skills
+ </a>
+ <a
+ href="/projects/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ Projects
+ </a>
+ <a
+ href="/blog/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-cyber-cyan bg-cyber-cyan/10"
+ >
+ Blog
+ </a>
+ <a
+ href="/certifications/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ Certifications
+ </a>
+ <a
+ href="/contact/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ Contact
+ </a>
+ <a
+ href="/resume/"
+ class="block mt-2 px-3 py-2 rounded-md text-sm font-semibold text-cyber-cyan border border-cyber-cyan/50 text-center hover:bg-cyber-cyan/10 transition-all"
+ >
+ Resume
+ </a>
+ </div>
+ </div>
+</nav>
+ <main
+ id="main-content"
+ class="pt-16"
+ style="position: relative; z-index: 1"
+ >
+<section class="py-24 max-w-5xl mx-auto px-4">
+ <!-- Header -->
+ <div class="mb-12">
+ <p class="text-cyber-cyan font-mono text-sm mb-2">// thoughts & research</p>
+ <h1 class="text-4xl sm:text-5xl font-bold text-white">Blog & Articles</h1>
+ <p class="text-gray-400 mt-4">
+ Deep dives into LLMs, Voice AI, Agentic systems and MLOps.
+ </p>
+ </div>
+ <!-- Featured Post -->
+ <article
+ onclick="openPost(0)"
+ class="group mb-10 rounded-2xl border border-cyber-purple/30 overflow-hidden hover:border-cyber-purple/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-glow-purple cursor-pointer slide-up"
+ >
+ <div class="grid grid-cols-1 md:grid-cols-2">
+ <!-- Image / Gradient -->
+ <div
+ class="relative aspect-video md:aspect-auto overflow-hidden bg-dark-base min-h-48"
+ >
+ <img
+ src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*0BtNI6HqOWn7_BNaCGRwlQ.png"
+ alt="Deep Dive into LangGraph Nodes: Inside the Core Building Block of AI Agents"
+ loading="lazy"
+ class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+ onerror="
+ this.style.display = 'none';
+ this.nextElementSibling.style.display = 'flex';
+ "
+ />
+ <!-- Gradient fallback -->
+ <div
+ class="absolute inset-0 flex items-center justify-center"
+ style="display:none;background:linear-gradient(135deg,#0a0f1e,#1a0a2e);"
+ >
+ <span class="text-3xl font-bold gradient-text text-center px-6">
+ Deep Dive into LangGraph Nodes
+ </span>
+ </div>
+ <!-- Hover overlay -->
+ <div
+ class="absolute inset-0 bg-gradient-to-t from-dark-base/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4"
+ >
+ <span
+ class="text-white text-sm font-medium flex items-center gap-2 bg-cyber-purple/20 border border-cyber-purple/40 px-4 py-1.5 rounded-full backdrop-blur-sm"
+ >
+ <!-- ✅ Icon changes based on post_url -->
+ <i
+ class="fas fa-external-link-alt text-cyber-purple"
+ ></i>
+ Read Article
+ </span>
+ </div>
+ </div>
+ <!-- Content -->
+ <div class="p-8 flex flex-col justify-center">
+ <span
+ class="text-xs px-2 py-0.5 rounded-full bg-cyber-purple/20 text-cyber-purple border border-cyber-purple/30 w-fit mb-4"
+ >
+ ⭐ Featured
+ </span>
+ <h2
+ class="text-2xl font-bold text-white mb-3 group-hover:text-cyber-cyan transition-colors leading-tight"
+ >
+ Deep Dive into LangGraph Nodes: Inside the Core Building Block of AI Agents
+ </h2>
+ <p class="text-gray-400 text-sm leading-relaxed mb-4">
+ Ever wondered how AI agents break down complex tasks into actionable steps? The secret lies in Nodes — the foundational building blocks that give LangGraph agents their power and flexibility.
+ </p>
+ <div class="flex items-center gap-4 text-xs text-gray-500 mb-4">
+ <span
+ ><i class="fas fa-calendar mr-1"></i>2025-12-07</span
+ >
+ <span
+ ><i class="fas fa-clock mr-1"></i>6 min
+ read</span
+ >
+ </div>
+ <div class="flex flex-wrap gap-2">
+ </div>
+ </div>
+ </div>
+ </article>
+ <!-- All Posts Grid -->
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+ <article
+ onclick="openPost(0)"
+ class="group post-card rounded-2xl border border-dark-border bg-dark-card/40 hover:border-cyber-cyan/30 transition-all duration-300 hover:-translate-y-1 cursor-pointer slide-up overflow-hidden"
+ >
+ <!-- Image -->
+ <div class="relative aspect-video overflow-hidden bg-dark-base">
+ <img
+ src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*NngDtsU3uJuQCs4ymehMWA.gif"
+ alt="I Built a Zero-Cost Affiliate Lead System That Runs Itself — Here’s How"
+ loading="lazy"
+ class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+ onerror="
+ this.style.display = 'none';
+ this.nextElementSibling.style.display = 'flex';
+ "
+ />
+ <div
+ class="absolute inset-0 flex items-center justify-center"
+ style="display:none;min-height:180px;background:linear-gradient(135deg,#0a0f1e,#0f1629);"
+ >
+ <span class="text-2xl font-bold gradient-text text-center px-6">
+ I Built a Zero-Cost Affiliate Lead System That Runs Itself — Here’s How
+ </span>
+ </div>
+ <!-- Hover overlay -->
+ <div
+ class="absolute inset-0 bg-gradient-to-t from-dark-base/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-3"
+ >
+ <span
+ class="text-white text-xs font-medium flex items-center gap-1.5 bg-cyber-cyan/20 border border-cyber-cyan/40 px-3 py-1 rounded-full backdrop-blur-sm"
+ >
+ <!-- ✅ Icon changes based on post_url -->
+ <i
+ class="fas fa-external-link-alt text-cyber-cyan"
+ ></i>
+ Read Article
+ </span>
+ </div>
+ </div>
+ <!-- Content -->
+ <div class="p-6">
+ <div class="flex items-center gap-4 text-xs text-gray-500 mb-3">
+ <span
+ ><i class="fas fa-calendar mr-1"></i>2025-12-26</span
+ >
+ <span
+ ><i class="fas fa-clock mr-1"></i>4 min
+ read</span
+ >
+ </div>
+ <h2
+ class="font-bold text-white text-lg leading-tight mb-2 group-hover:text-cyber-cyan transition-colors"
+ >
+ I Built a Zero-Cost Affiliate Lead System That Runs Itself — Here’s How
+ </h2>
+ <p class="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-3">
+ If you’re manually copying form submissions into affiliate-specific spreadsheets, you already know the pain. Tab switching, copy-pasting, accidentally putting data in the wrong sheet and starting over. This kind of manual work just doesn’t make sense anymore.
+ </p>
+ <div class="flex flex-wrap gap-2">
+ </div>
+ </div>
+ </article>
+ </div>
+</section>
+<!-- ═══════════════════════════════════════════════════
+ BLOG POST MODAL
+═══════════════════════════════════════════════════ -->
+<div
+ id="post-modal"
+ class="fixed inset-0 z-50 flex items-center justify-center p-4"
+ style="display: none !important"
+>
+ <!-- Backdrop -->
+ <div
+ class="absolute inset-0 bg-dark-base/85 backdrop-blur-md"
+ onclick="closePost()"
+ ></div>
+ <!-- Modal Window -->
+ <div
+ id="post-window"
+ class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl border border-dark-border bg-dark-card shadow-2xl shadow-black/60"
+ style="scrollbar-width: thin"
+ >
+ <!-- Close -->
+ <button
+ onclick="closePost()"
+ class="sticky top-4 float-right mr-4 z-20 w-8 h-8 rounded-lg bg-dark-base/90 border border-dark-border flex items-center justify-center text-gray-400 hover:text-white hover:border-cyber-cyan/50 transition-all backdrop-blur-sm"
+ aria-label="Close"
+ >
+ <i class="fas fa-times text-sm"></i>
+ </button>
+ <div id="post-content" class="clear-both"></div>
+ </div>
+</div>
+<!-- ✅ Blog Post Data — post_url added -->
+<script id="posts-data" type="application/json">
+  [
+    {
+      "title":           "I Built a Zero-Cost Affiliate Lead System That Runs Itself \u2014 Here\u2019s How",
+      "excerpt":         "If you\u2019re manually copying form submissions into affiliate-specific spreadsheets, you already know the pain. Tab switching, copy-pasting, accidentally putting data in the wrong sheet and starting over. This kind of manual work just doesn\u2019t make sense anymore.",
+      "content":         "",
+      "cover_image_url": "https://miro.medium.com/v2/resize:fit:720/format:webp/1*NngDtsU3uJuQCs4ymehMWA.gif",
+      "post_url":        "https://medium.com/@neloyupwork018/i-built-a-zero-cost-affiliate-lead-system-that-runs-itself-heres-how-fc2b8d4fb2ee",
+      "publish_date":    "2025-12-26",
+      "read_time":       4,
+      "featured":        false,
+      "tags": []
+    },    {
+      "title":           "Deep Dive into LangGraph Nodes: Inside the Core Building Block of AI Agents",
+      "excerpt":         "Ever wondered how AI agents break down complex tasks into actionable steps? The secret lies in Nodes \u2014 the foundational building blocks that give LangGraph agents their power and flexibility.",
+      "content":         "",
+      "cover_image_url": "https://miro.medium.com/v2/resize:fit:720/format:webp/1*0BtNI6HqOWn7_BNaCGRwlQ.png",
+      "post_url":        "https://medium.com/@neloyupwork018/deep-dive-into-langgraph-nodes-inside-the-core-building-block-of-ai-agents-619cb5bb9942",
+      "publish_date":    "2025-12-07",
+      "read_time":       6,
+      "featured":        true,
+      "tags": []
+    }  ]
+</script>
+ </main>
+<footer class="border-t border-dark-border mt-24" role="contentinfo">
+ <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+ <!-- Brand -->
+ <div>
+ <div class="flex items-center gap-2 mb-3">
+ <div
+ class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyber-cyan to-cyber-purple flex items-center justify-center text-white font-mono font-bold text-sm"
+ >
+ N
+ </div>
+ <span class="font-mono font-semibold text-white"
+ >Neloy Barman</span
+ >
+ </div>
+ <p class="text-gray-400 text-sm leading-relaxed">
+ AI Engineer specializing in Large Language Models, Voice AI systems, and Agentic automation pipelines.
+ </p>
+ </div>
+ <!-- Quick Links -->
+ <div>
+ <h3
+ class="text-white font-semibold text-sm mb-4 uppercase tracking-wider"
+ >
+ Quick Links
+ </h3>
+ <ul class="space-y-2">
+ <li>
+ <a
+ href="/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Home
+ </a>
+ </li>
+ <li>
+ <a
+ href="/about/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ About
+ </a>
+ </li>
+ <li>
+ <a
+ href="/experience/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Experience
+ </a>
+ </li>
+ <li>
+ <a
+ href="/education/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Education
+ </a>
+ </li>
+ <li>
+ <a
+ href="/skills/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Skills
+ </a>
+ </li>
+ <li>
+ <a
+ href="/projects/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Projects
+ </a>
+ </li>
+ <li>
+ <a
+ href="/blog/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Blog
+ </a>
+ </li>
+ <li>
+ <a
+ href="/certifications/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Certifications
+ </a>
+ </li>
+ <li>
+ <a
+ href="/contact/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Contact
+ </a>
+ </li>
+ </ul>
+ </div>
+ <!-- Social Links -->
+ <div>
+ <h3
+ class="text-white font-semibold text-sm mb-4 uppercase tracking-wider"
+ >
+ Connect
+ </h3>
+ <div class="flex flex-wrap gap-3">
+ <a
+ href="https://github.com/Neloy-Barman"
+ target="_blank"
+ rel="noopener noreferrer"
+ aria-label="GitHub"
+ style="width: 40px; height: 40px"
+ class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan/50 hover:bg-cyber-cyan/10 transition-all duration-200"
+ >
+ <span
+ class="iconify"
+ data-icon="skill-icons:github-dark"
+ data-width="25"
+ data-height="25"
+ ></span>
+ </a>
+ <a
+ href="https://www.linkedin.com/in/neloy-barman/"
+ target="_blank"
+ rel="noopener noreferrer"
+ aria-label="LinkedIn"
+ style="width: 40px; height: 40px"
+ class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan/50 hover:bg-cyber-cyan/10 transition-all duration-200"
+ >
+ <span
+ class="iconify"
+ data-icon="skill-icons:linkedin"
+ data-width="25"
+ data-height="25"
+ ></span>
+ </a>
+ <a
+ href="https://n8n.io/creators/neloy-barman/"
+ target="_blank"
+ rel="noopener noreferrer"
+ aria-label="n8n Creator"
+ style="width: 40px; height: 40px"
+ class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan/50 hover:bg-cyber-cyan/10 transition-all duration-200"
+ >
+ <span
+ class="iconify"
+ data-icon="simple-icons:n8n"
+ data-width="25"
+ data-height="25"
+ ></span>
+ </a>
+ <a
+ href="https://medium.com/@neloyupwork018"
+ target="_blank"
+ rel="noopener noreferrer"
+ aria-label="Medium"
+ style="width: 40px; height: 40px"
+ class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan/50 hover:bg-cyber-cyan/10 transition-all duration-200"
+ >
+ <span
+ class="iconify"
+ data-icon="simple-icons:medium"
+ data-width="25"
+ data-height="25"
+ ></span>
+ </a>
+ <a
+ href="https://leetcode.com/u/neloycareer018/"
+ target="_blank"
+ rel="noopener noreferrer"
+ aria-label="LeetCode"
+ style="width: 40px; height: 40px"
+ class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan/50 hover:bg-cyber-cyan/10 transition-all duration-200"
+ >
+ <span
+ class="iconify"
+ data-icon="simple-icons:leetcode"
+ data-width="25"
+ data-height="25"
+ ></span>
+ </a>
+ <a
+ href="https://www.kaggle.com/neloybarman018"
+ target="_blank"
+ rel="noopener noreferrer"
+ aria-label="Kaggle"
+ style="width: 40px; height: 40px"
+ class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan/50 hover:bg-cyber-cyan/10 transition-all duration-200"
+ >
+ <span
+ class="iconify"
+ data-icon="devicon:kaggle"
+ data-width="25"
+ data-height="25"
+ ></span>
+ </a>
+ <a
+ href="mailto:neloycareer018@gmail.com"
+ target="_blank"
+ rel="noopener noreferrer"
+ aria-label="Mail"
+ style="width: 40px; height: 40px"
+ class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan/50 hover:bg-cyber-cyan/10 transition-all duration-200"
+ >
+ <span
+ class="iconify"
+ data-icon="skill-icons:gmail-light"
+ data-width="25"
+ data-height="25"
+ ></span>
+ </a>
+ </div>
+ <a
+ href="mailto:neloycareer018@gmail.com"
+ class="mt-4 block text-sm text-gray-400 hover:text-cyber-cyan transition-colors"
+ >
+ <i class="fas fa-envelope mr-2"></i>neloycareer018@gmail.com
+ </a>
+ </div>
+ </div>
+ <!-- Bottom Bar -->
+ <div
+ class="mt-10 pt-6 border-t border-dark-border flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-500"
+ >
+ <p>© 2026 Neloy Barman. All rights reserved.</p>
+ <p class="font-mono text-xs flex items-center gap-1.5">
+ Built with
+ <span style="color: #da7756">Claude Sonnet 4.6</span>
+ </p>
+ </div>
+ </div>
+</footer>
+ <script defer src="/static/js/theme.js"></script>
+ <script defer src="/static/js/main.js"></script>
+ <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<script>
+  var POSTS = [];
+  try {
+    POSTS = JSON.parse(document.getElementById("posts-data").textContent);
+  } catch (e) {
+    console.error("Post data error:", e);
+  }
+
+  function openPost(index) {
+    var p = POSTS[index];
+    if (!p) return;
+
+    // ✅ If post_url exists — redirect instead of opening modal
+    if (p.post_url) {
+      window.open(p.post_url, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    // ── No post_url — open modal as usual ─────────────────
+    var modal = document.getElementById("post-modal");
+    var content = document.getElementById("post-content");
+    var win = document.getElementById("post-window");
+
+    // Format content: markdown-lite
+    var body = (p.content || p.excerpt || "No content available.")
+      .replace(
+        /^# (.*?)$/gm,
+        '<h1 class="text-2xl font-bold text-white mt-8 mb-3">\$1</h1>',
+      )
+      .replace(
+        /^## (.*?)$/gm,
+        '<h2 class="text-xl font-bold text-white mt-6 mb-2 flex items-center gap-2"><span class="text-cyber-cyan text-sm font-mono">//</span>\$1</h2>',
+      )
+      .replace(
+        /^### (.*?)$/gm,
+        '<h3 class="text-lg font-semibold text-white mt-4 mb-2">\$1</h3>',
+      )
+      .replace(
+        /\*\*(.*?)\*\*/g,
+        '<strong class="text-white font-semibold">\$1</strong>',
+      )
+      .replace(/\*(.*?)\*/g, '<em class="text-gray-300 italic">\$1</em>')
+      .replace(
+        /`(.*?)`/g,
+        '<code class="px-1.5 py-0.5 rounded text-xs font-mono bg-cyber-cyan/10 text-cyber-cyan">\$1</code>',
+      )
+      .replace(
+        /\n\n/g,
+        '</p><p class="text-gray-300 text-sm leading-relaxed mb-3">',
+      )
+      .replace(/\n/g, "<br>");
+
+    // Tags
+    var tagsHtml = p.tags
+      .map(function (t) {
+        return (
+          '<span class="text-xs px-2 py-1 rounded-md bg-cyber-purple/10 text-cyber-purple border border-cyber-purple/20">' +
+          esc(t) +
+          "</span>"
+        );
+      })
+      .join("");
+
+    // Cover image or gradient
+    var coverHtml = "";
+    if (p.cover_image_url) {
+      coverHtml =
+        '<div class="relative w-full overflow-hidden rounded-t-2xl" style="height:220px;">' +
+        '<img src="' +
+        esc(p.cover_image_url) +
+        '" alt="' +
+        esc(p.title) +
+        '" ' +
+        'class="w-full h-full object-contain" ' +
+        "onerror=\"this.parentElement.style.background='linear-gradient(135deg,#0a0f1e,#1a0a2e)';this.style.display='none';\" />" +
+        '<div class="absolute inset-0 bg-gradient-to-t from-dark-card via-dark-card/30 to-transparent"></div>' +
+        "</div>";
+    } else {
+      coverHtml =
+        '<div class="w-full flex items-center justify-center rounded-t-2xl" ' +
+        'style="height:180px;background:linear-gradient(135deg,#0a0f1e,#1a0a2e);">' +
+        '<span class="text-2xl font-bold gradient-text text-center px-6">' +
+        esc(p.title.split(":")[0]) +
+        "</span>" +
+        "</div>";
+    }
+
+    content.innerHTML =
+      coverHtml +
+      '<div class="px-8 pb-8 pt-6">' +
+      (p.featured
+        ? '<span class="inline-block text-xs px-2 py-0.5 rounded-full bg-cyber-purple/20 text-cyber-purple border border-cyber-purple/30 mb-4">⭐ Featured</span>'
+        : "") +
+      '<h1 class="text-2xl sm:text-3xl font-bold text-white leading-tight mb-4">' +
+      esc(p.title) +
+      "</h1>" +
+      '<div class="flex flex-wrap items-center gap-4 text-xs text-gray-500 font-mono mb-4">' +
+      (p.publish_date
+        ? '<span class="flex items-center gap-1"><i class="fas fa-calendar text-cyber-cyan"></i>' +
+          esc(p.publish_date) +
+          "</span>"
+        : "") +
+      '<span class="flex items-center gap-1"><i class="fas fa-clock text-cyber-cyan"></i>' +
+      p.read_time +
+      " min read</span>" +
+      "</div>" +
+      (tagsHtml
+        ? '<div class="flex flex-wrap gap-2 mb-6">' + tagsHtml + "</div>"
+        : "") +
+      '<div class="border-t border-dark-border mb-6"></div>' +
+      '<div class="post-body">' +
+      '<p class="text-gray-300 text-sm leading-relaxed mb-3">' +
+      body +
+      "</p>" +
+      "</div>" +
+      "</div>";
+
+    // Show modal
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+    win.scrollTop = 0;
+
+    // Animate in
+    win.style.opacity = "0";
+    win.style.transform = "translateY(24px) scale(0.97)";
+    win.style.transition = "opacity 0.25s ease, transform 0.25s ease";
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        win.style.opacity = "1";
+        win.style.transform = "translateY(0) scale(1)";
+      });
+    });
+  }
+
+  function closePost() {
+    var modal = document.getElementById("post-modal");
+    var win = document.getElementById("post-window");
+    win.style.opacity = "0";
+    win.style.transform = "translateY(24px) scale(0.97)";
+    setTimeout(function () {
+      modal.style.display = "none";
+      document.body.style.overflow = "";
+      win.style.opacity = "";
+      win.style.transform = "";
+    }, 220);
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closePost();
+  });
+
+  function esc(str) {
+    if (!str) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+</script>
+ </body>
+</html>

@@ -1,0 +1,400 @@
+{# templates/pages/blog.html #} {% extends "base.html" %} {% block content %}
+
+<section class="py-24 max-w-5xl mx-auto px-4">
+  <!-- Header -->
+  <div class="mb-12">
+    <p class="text-cyber-cyan font-mono text-sm mb-2">// thoughts & research</p>
+    <h1 class="text-4xl sm:text-5xl font-bold text-white">Blog & Articles</h1>
+    <p class="text-gray-400 mt-4">
+      Deep dives into LLMs, Voice AI, Agentic systems and MLOps.
+    </p>
+  </div>
+
+  {% if posts %}
+
+  <!-- Featured Post -->
+  {% set featured = posts | selectattr('featured') | list %} {% if featured %}
+  <article
+    onclick="openPost(0)"
+    class="group mb-10 rounded-2xl border border-cyber-purple/30 overflow-hidden hover:border-cyber-purple/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-glow-purple cursor-pointer slide-up"
+  >
+    <div class="grid grid-cols-1 md:grid-cols-2">
+      <!-- Image / Gradient -->
+      <div
+        class="relative aspect-video md:aspect-auto overflow-hidden bg-dark-base min-h-48"
+      >
+        {% if featured[0].cover_image_url %}
+        <img
+          src="{{ featured[0].cover_image_url }}"
+          alt="{{ featured[0].title }}"
+          loading="lazy"
+          class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+          onerror="
+            this.style.display = 'none';
+            this.nextElementSibling.style.display = 'flex';
+          "
+        />
+        {% endif %}
+        <!-- Gradient fallback -->
+        <div
+          class="{% if featured[0].cover_image_url %}absolute inset-0{% else %}w-full h-full{% endif %} flex items-center justify-center"
+          style="{% if featured[0].cover_image_url %}display:none;{% endif %}background:linear-gradient(135deg,#0a0f1e,#1a0a2e);"
+        >
+          <span class="text-3xl font-bold gradient-text text-center px-6">
+            {{ featured[0].title.split(':')[0] }}
+          </span>
+        </div>
+        <!-- Hover overlay -->
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-dark-base/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4"
+        >
+          <span
+            class="text-white text-sm font-medium flex items-center gap-2 bg-cyber-purple/20 border border-cyber-purple/40 px-4 py-1.5 rounded-full backdrop-blur-sm"
+          >
+            <!-- ✅ Icon changes based on post_url -->
+            <i
+              class="fas {{ 'fa-external-link-alt' if featured[0].post_url else 'fa-book-open' }} text-cyber-purple"
+            ></i>
+            {{ 'Read Article' if featured[0].post_url else 'Read Article' }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="p-8 flex flex-col justify-center">
+        <span
+          class="text-xs px-2 py-0.5 rounded-full bg-cyber-purple/20 text-cyber-purple border border-cyber-purple/30 w-fit mb-4"
+        >
+          ⭐ Featured
+        </span>
+        <h2
+          class="text-2xl font-bold text-white mb-3 group-hover:text-cyber-cyan transition-colors leading-tight"
+        >
+          {{ featured[0].title }}
+        </h2>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          {{ featured[0].excerpt }}
+        </p>
+        <div class="flex items-center gap-4 text-xs text-gray-500 mb-4">
+          <span
+            ><i class="fas fa-calendar mr-1"></i>{{ featured[0].publish_date
+            }}</span
+          >
+          <span
+            ><i class="fas fa-clock mr-1"></i>{{ featured[0].read_time }} min
+            read</span
+          >
+        </div>
+        <div class="flex flex-wrap gap-2">
+          {% for tag in featured[0].tags %}
+          <span
+            class="text-xs px-2 py-0.5 rounded-md bg-cyber-purple/10 text-cyber-purple border border-cyber-purple/20"
+          >
+            {{ tag.name }}
+          </span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </article>
+  {% endif %}
+
+  <!-- All Posts Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {% for post in posts %} {% if not post.featured %}
+    <article
+      onclick="openPost({{ loop.index0 }})"
+      class="group post-card rounded-2xl border border-dark-border bg-dark-card/40 hover:border-cyber-cyan/30 transition-all duration-300 hover:-translate-y-1 cursor-pointer slide-up overflow-hidden"
+    >
+      <!-- Image -->
+      <div class="relative aspect-video overflow-hidden bg-dark-base">
+        {% if post.cover_image_url %}
+        <img
+          src="{{ post.cover_image_url }}"
+          alt="{{ post.title }}"
+          loading="lazy"
+          class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+          onerror="
+            this.style.display = 'none';
+            this.nextElementSibling.style.display = 'flex';
+          "
+        />
+        {% endif %}
+        <div
+          class="{% if post.cover_image_url %}absolute inset-0{% else %}w-full h-full{% endif %} flex items-center justify-center"
+          style="{% if post.cover_image_url %}display:none;{% endif %}min-height:180px;background:linear-gradient(135deg,#0a0f1e,#0f1629);"
+        >
+          <span class="text-2xl font-bold gradient-text text-center px-6">
+            {{ post.title.split(':')[0] }}
+          </span>
+        </div>
+        <!-- Hover overlay -->
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-dark-base/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-3"
+        >
+          <span
+            class="text-white text-xs font-medium flex items-center gap-1.5 bg-cyber-cyan/20 border border-cyber-cyan/40 px-3 py-1 rounded-full backdrop-blur-sm"
+          >
+            <!-- ✅ Icon changes based on post_url -->
+            <i
+              class="fas {{ 'fa-external-link-alt' if post.post_url else 'fa-book-open' }} text-cyber-cyan"
+            ></i>
+            Read Article
+          </span>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="p-6">
+        <div class="flex items-center gap-4 text-xs text-gray-500 mb-3">
+          <span
+            ><i class="fas fa-calendar mr-1"></i>{{ post.publish_date }}</span
+          >
+          <span
+            ><i class="fas fa-clock mr-1"></i>{{ post.read_time }} min
+            read</span
+          >
+        </div>
+        <h2
+          class="font-bold text-white text-lg leading-tight mb-2 group-hover:text-cyber-cyan transition-colors"
+        >
+          {{ post.title }}
+        </h2>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-3">
+          {{ post.excerpt }}
+        </p>
+        <div class="flex flex-wrap gap-2">
+          {% for tag in post.tags %}
+          <span
+            class="text-xs px-2 py-0.5 rounded-md bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/20"
+          >
+            {{ tag.name }}
+          </span>
+          {% endfor %}
+        </div>
+      </div>
+    </article>
+    {% endif %} {% endfor %}
+  </div>
+
+  {% else %}
+  <div class="text-center py-20 text-gray-500">
+    <i class="fas fa-pen-nib text-4xl mb-4 text-gray-700 block"></i>
+    <p>No articles published yet.</p>
+  </div>
+  {% endif %}
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     BLOG POST MODAL
+═══════════════════════════════════════════════════ -->
+<div
+  id="post-modal"
+  class="fixed inset-0 z-50 flex items-center justify-center p-4"
+  style="display: none !important"
+>
+  <!-- Backdrop -->
+  <div
+    class="absolute inset-0 bg-dark-base/85 backdrop-blur-md"
+    onclick="closePost()"
+  ></div>
+
+  <!-- Modal Window -->
+  <div
+    id="post-window"
+    class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl border border-dark-border bg-dark-card shadow-2xl shadow-black/60"
+    style="scrollbar-width: thin"
+  >
+    <!-- Close -->
+    <button
+      onclick="closePost()"
+      class="sticky top-4 float-right mr-4 z-20 w-8 h-8 rounded-lg bg-dark-base/90 border border-dark-border flex items-center justify-center text-gray-400 hover:text-white hover:border-cyber-cyan/50 transition-all backdrop-blur-sm"
+      aria-label="Close"
+    >
+      <i class="fas fa-times text-sm"></i>
+    </button>
+    <div id="post-content" class="clear-both"></div>
+  </div>
+</div>
+
+<!-- ✅ Blog Post Data — post_url added -->
+<script id="posts-data" type="application/json">
+  [
+    {% for post in posts %}
+    {
+      "title":           {{ post.title | tojson }},
+      "excerpt":         {{ (post.excerpt or '') | tojson }},
+      "content":         {{ (post.content or '') | tojson }},
+      "cover_image_url": {{ (post.cover_image_url or '') | tojson }},
+      "post_url":        {{ (post.post_url or '') | tojson }},
+      "publish_date":    {{ (post.publish_date or '') | tojson }},
+      "read_time":       {{ post.read_time | tojson }},
+      "featured":        {{ 'true' if post.featured else 'false' }},
+      "tags": [{% for tag in post.tags %}{{ tag.name | tojson }}{% if not loop.last %},{% endif %}{% endfor %}]
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+</script>
+
+{% endblock %} {% block extra_scripts %}
+<script>
+  var POSTS = [];
+  try {
+    POSTS = JSON.parse(document.getElementById("posts-data").textContent);
+  } catch (e) {
+    console.error("Post data error:", e);
+  }
+
+  function openPost(index) {
+    var p = POSTS[index];
+    if (!p) return;
+
+    // ✅ If post_url exists — redirect instead of opening modal
+    if (p.post_url) {
+      window.open(p.post_url, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    // ── No post_url — open modal as usual ─────────────────
+    var modal = document.getElementById("post-modal");
+    var content = document.getElementById("post-content");
+    var win = document.getElementById("post-window");
+
+    // Format content: markdown-lite
+    var body = (p.content || p.excerpt || "No content available.")
+      .replace(
+        /^# (.*?)$/gm,
+        '<h1 class="text-2xl font-bold text-white mt-8 mb-3">\$1</h1>',
+      )
+      .replace(
+        /^## (.*?)$/gm,
+        '<h2 class="text-xl font-bold text-white mt-6 mb-2 flex items-center gap-2"><span class="text-cyber-cyan text-sm font-mono">//</span>\$1</h2>',
+      )
+      .replace(
+        /^### (.*?)$/gm,
+        '<h3 class="text-lg font-semibold text-white mt-4 mb-2">\$1</h3>',
+      )
+      .replace(
+        /\*\*(.*?)\*\*/g,
+        '<strong class="text-white font-semibold">\$1</strong>',
+      )
+      .replace(/\*(.*?)\*/g, '<em class="text-gray-300 italic">\$1</em>')
+      .replace(
+        /`(.*?)`/g,
+        '<code class="px-1.5 py-0.5 rounded text-xs font-mono bg-cyber-cyan/10 text-cyber-cyan">\$1</code>',
+      )
+      .replace(
+        /\n\n/g,
+        '</p><p class="text-gray-300 text-sm leading-relaxed mb-3">',
+      )
+      .replace(/\n/g, "<br>");
+
+    // Tags
+    var tagsHtml = p.tags
+      .map(function (t) {
+        return (
+          '<span class="text-xs px-2 py-1 rounded-md bg-cyber-purple/10 text-cyber-purple border border-cyber-purple/20">' +
+          esc(t) +
+          "</span>"
+        );
+      })
+      .join("");
+
+    // Cover image or gradient
+    var coverHtml = "";
+    if (p.cover_image_url) {
+      coverHtml =
+        '<div class="relative w-full overflow-hidden rounded-t-2xl" style="height:220px;">' +
+        '<img src="' +
+        esc(p.cover_image_url) +
+        '" alt="' +
+        esc(p.title) +
+        '" ' +
+        'class="w-full h-full object-contain" ' +
+        "onerror=\"this.parentElement.style.background='linear-gradient(135deg,#0a0f1e,#1a0a2e)';this.style.display='none';\" />" +
+        '<div class="absolute inset-0 bg-gradient-to-t from-dark-card via-dark-card/30 to-transparent"></div>' +
+        "</div>";
+    } else {
+      coverHtml =
+        '<div class="w-full flex items-center justify-center rounded-t-2xl" ' +
+        'style="height:180px;background:linear-gradient(135deg,#0a0f1e,#1a0a2e);">' +
+        '<span class="text-2xl font-bold gradient-text text-center px-6">' +
+        esc(p.title.split(":")[0]) +
+        "</span>" +
+        "</div>";
+    }
+
+    content.innerHTML =
+      coverHtml +
+      '<div class="px-8 pb-8 pt-6">' +
+      (p.featured
+        ? '<span class="inline-block text-xs px-2 py-0.5 rounded-full bg-cyber-purple/20 text-cyber-purple border border-cyber-purple/30 mb-4">⭐ Featured</span>'
+        : "") +
+      '<h1 class="text-2xl sm:text-3xl font-bold text-white leading-tight mb-4">' +
+      esc(p.title) +
+      "</h1>" +
+      '<div class="flex flex-wrap items-center gap-4 text-xs text-gray-500 font-mono mb-4">' +
+      (p.publish_date
+        ? '<span class="flex items-center gap-1"><i class="fas fa-calendar text-cyber-cyan"></i>' +
+          esc(p.publish_date) +
+          "</span>"
+        : "") +
+      '<span class="flex items-center gap-1"><i class="fas fa-clock text-cyber-cyan"></i>' +
+      p.read_time +
+      " min read</span>" +
+      "</div>" +
+      (tagsHtml
+        ? '<div class="flex flex-wrap gap-2 mb-6">' + tagsHtml + "</div>"
+        : "") +
+      '<div class="border-t border-dark-border mb-6"></div>' +
+      '<div class="post-body">' +
+      '<p class="text-gray-300 text-sm leading-relaxed mb-3">' +
+      body +
+      "</p>" +
+      "</div>" +
+      "</div>";
+
+    // Show modal
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+    win.scrollTop = 0;
+
+    // Animate in
+    win.style.opacity = "0";
+    win.style.transform = "translateY(24px) scale(0.97)";
+    win.style.transition = "opacity 0.25s ease, transform 0.25s ease";
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        win.style.opacity = "1";
+        win.style.transform = "translateY(0) scale(1)";
+      });
+    });
+  }
+
+  function closePost() {
+    var modal = document.getElementById("post-modal");
+    var win = document.getElementById("post-window");
+    win.style.opacity = "0";
+    win.style.transform = "translateY(24px) scale(0.97)";
+    setTimeout(function () {
+      modal.style.display = "none";
+      document.body.style.overflow = "";
+      win.style.opacity = "";
+      win.style.transform = "";
+    }, 220);
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closePost();
+  });
+
+  function esc(str) {
+    if (!str) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+</script>
+{% endblock %}

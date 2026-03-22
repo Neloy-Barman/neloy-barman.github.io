@@ -1,0 +1,4 @@
+institution,degree,field_of_study,start_date,end_date,gpa,description,logo_url,location,display_order,is_visible,is_deleted
+Ahsanullah University of Science and Technology,Bachelor of Science,Computer Science and Engineering,2019 ,2023,3.542/4.00,,https://placehold.co/80x80/0a0f1e/00d4ff?text=B.Sc.,"Dhaka, Bangladesh",1,1,0
+Engineering University School and College,Higher Secondary Certificate,Science,2016,2018,5.00/5.00,,https://placehold.co/80x80/0a0f1e/00d4ff?text=HSC,"Dhaka, Bangladesh",2,1,0
+Narayanganj Ideal School,Secondary School Certificate,Science,,2016,5.00/5.00,,https://placehold.co/80x80/0a0f1e/00d4ff?text=SSC,"Narayanganj, Bangladesh",3,1,0

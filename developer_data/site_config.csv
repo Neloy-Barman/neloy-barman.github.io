@@ -1,0 +1,7 @@
+key,value,description,is_visible,is_deleted
+site_name,Neloy Barman,Agentic AI Engineer | Automation Specialist | Chatbot Developer,1,0
+site_url,https://neloy-barman.github.io/,Canonical Base URL,1,0
+site_author,Neloy Barman,Author Name,1,0
+nav_logo_text,Neloy Barman,Nav Logo Text,1,0
+copyright_year,2026,Footer Copyright Year,1,0
+site_keywords,"n8n, Agentic AI, AI Automation, Chatbot, Voice AI, Langchain, Langgraph, Python ",Meta keywords,1,0

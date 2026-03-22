@@ -1,0 +1,20 @@
+tag_id,name,slug,display_order,is_visible,is_deleted
+1,AI,ai,1,1,0
+2,n8n,n8n,3,1,0
+3,RAG,rag,5,1,0
+4,XAI,xai,6,1,0
+5,LLM,llm,7,1,0
+6,Multi-Modal,multi-modal,8,1,0
+7,OpenAI,openai,4,1,0
+8,Self-Hosted,self-hosted,11,1,0
+9,Automation,automation,2,1,0
+10,Analysis,analysis,14,1,0
+11,Machine Learning,machine-learning,13,1,0
+12,Deep Learning,deep-learning,12,1,0
+13,UI ,ui,15,1,0
+14,Mobile App,mobile-app,16,1,0
+15,Vision,vision,9,1,0
+16,NLP,nlp,10,1,0
+17,RDMS,rdms,16,1,0
+18,Qdrant,qdrant,17,1,0
+19,Docker,docker,18,1,0

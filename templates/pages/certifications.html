@@ -1,0 +1,216 @@
+{# templates/pages/certifications.html #}
+{% extends "base.html" %}
+{% block content %}
+
+<section class="py-24 max-w-6xl mx-auto px-4">
+  <div class="mb-12">
+    <p class="text-cyber-cyan font-mono text-sm mb-2">// credentials</p>
+    <h1 class="text-4xl sm:text-5xl font-bold text-white">
+      Certifications & Courses
+    </h1>
+  </div>
+
+  {% if certifications %}
+
+  <!-- ── Featured ───────────────────────────────────────────────── -->
+  {% set featured_certs = certifications | selectattr('featured') | list %}
+  {% if featured_certs %}
+  <div class="mb-12">
+    <h2 class="text-lg font-semibold text-gray-300 mb-4 flex items-center gap-2">
+      <i class="fas fa-star text-amber-400 text-sm"></i> Featured Certifications
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {% for cert in featured_certs %}
+
+      {# Wrap the entire card in an <a> if course_link exists, else a plain div #}
+      {% if cert.course_link %}
+      <a href="{{ cert.course_link }}"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="group block p-6 rounded-2xl border border-cyber-cyan/30 bg-cyber-cyan/5
+                hover:border-cyber-cyan/60 hover:bg-cyber-cyan/10
+                transition-all duration-300 slide-up">
+      {% else %}
+      <div class="group p-6 rounded-2xl border border-cyber-cyan/30 bg-cyber-cyan/5
+                  hover:border-cyber-cyan/60 transition-all duration-300 slide-up">
+      {% endif %}
+
+        <!-- Header: logo + title -->
+        <div class="flex items-start gap-4 mb-4">
+          <img
+            src="{{ cert.logo_url }}"
+            alt="{{ cert.issuer }}"
+            loading="lazy"
+            style="width: 55px; height: 55px; padding: 2px"
+            class="org-logo rounded-xl object-contain border border-dark-border shrink-0"
+            onerror="this.src='https://placehold.co/48x48/0a0f1e/00d4ff?text=Cert'"
+          />
+          <div class="flex-1 min-w-0">
+            <h3 class="font-bold text-white text-sm leading-tight flex items-center gap-1.5">
+              {{ cert.title }}
+              {% if cert.course_link %}
+              <i class="fas fa-arrow-up-right-from-square text-cyber-cyan/50
+                         group-hover:text-cyber-cyan text-[10px] transition-colors shrink-0"></i>
+              {% endif %}
+            </h3>
+            <p class="text-cyber-cyan text-xs mt-1">{{ cert.issuer }}</p>
+          </div>
+        </div>
+
+        <!-- Description -->
+        {% if cert.description %}
+        <p class="text-gray-400 text-xs leading-relaxed mb-4 line-clamp-3">
+          {{ cert.description }}
+        </p>
+        {% endif %}
+
+        <!-- Meta: dates / effort / credential id -->
+        <div class="text-xs text-gray-500 space-y-1">
+          {% if cert.estimated_effort %}
+          <p>
+            <i class="fas fa-gauge-high mr-2 text-cyber-cyan/50"></i>
+            {{ cert.estimated_effort }}
+          </p>
+          {% endif %}
+          {% if cert.issue_date %}
+          <p>
+            <i class="fas fa-calendar mr-2"></i>Issued: {{ cert.issue_date }}
+          </p>
+          {% endif %}
+          {% if cert.expiry_date %}
+          <p>
+            <i class="fas fa-clock mr-2"></i>Expires: {{ cert.expiry_date }}
+          </p>
+          {% endif %}
+          {% if cert.credential_id %}
+          <p class="font-mono text-gray-600">ID: {{ cert.credential_id }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Footer actions -->
+        {% if cert.credential_url %}
+        <div class="mt-4 pt-4 border-t border-dark-border/60">
+          {#
+            Stop propagation so "Verify Credential" doesn't bubble up to the
+            outer <a> (course_link). We use an inner <a> with a click handler.
+          #}
+          <a
+            href="{{ cert.credential_url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            onclick="event.stopPropagation(); event.preventDefault();
+                     window.open(this.href,'_blank','noopener,noreferrer');"
+            class="inline-flex items-center gap-1.5 text-xs text-gray-400
+                   hover:text-cyber-cyan transition-colors"
+          >
+            <i class="fas fa-external-link-alt"></i> Verify Credential
+          </a>
+        </div>
+        {% endif %}
+
+      {% if cert.course_link %}</a>{% else %}</div>{% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ── All Certifications ─────────────────────────────────────── -->
+  {% set other_certs = certifications | rejectattr('featured') | list %}
+  {% if other_certs %}
+  <h2 class="text-lg font-semibold text-gray-300 mb-4">All Certifications</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {% for cert in other_certs %}
+
+    {% if cert.course_link %}
+    <a href="{{ cert.course_link }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="group flex flex-col gap-3 p-5 rounded-2xl border border-dark-border
+              hover:border-cyber-cyan/30 transition-all duration-300
+              bg-dark-card/40 slide-up">
+    {% else %}
+    <div class="group flex flex-col gap-3 p-5 rounded-2xl border border-dark-border
+                hover:border-cyber-cyan/30 transition-all duration-300
+                bg-dark-card/40 slide-up">
+    {% endif %}
+
+      <!-- Top row: logo + title + verify icon -->
+      <div class="flex items-center gap-4">
+        <img
+          src="{{ cert.logo_url }}"
+          alt="{{ cert.issuer }}"
+          loading="lazy"
+          style="width: 48px; height: 48px; padding: 2px"
+          class="org-logo rounded-xl object-contain border border-dark-border shrink-0"
+          onerror="this.src='https://placehold.co/48x48/0a0f1e/00d4ff?text=Cert'"
+        />
+        <div class="flex-1 min-w-0">
+          <h3 class="font-semibold text-white text-sm leading-tight flex items-center gap-1.5">
+            <span class="truncate">{{ cert.title }}</span>
+            {% if cert.course_link %}
+            <i class="fas fa-arrow-up-right-from-square text-cyber-cyan/50
+                       group-hover:text-cyber-cyan text-[10px] transition-colors shrink-0"></i>
+            {% endif %}
+          </h3>
+          <p class="text-gray-400 text-xs mt-0.5">{{ cert.issuer }}</p>
+        </div>
+
+        <!-- Verify credential button (non-featured) -->
+        {% if cert.credential_url %}
+        <a
+          href="{{ cert.credential_url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Verify {{ cert.title }}"
+          onclick="event.stopPropagation(); event.preventDefault();
+                   window.open(this.href,'_blank','noopener,noreferrer');"
+          class="shrink-0 w-8 h-8 rounded-lg border border-dark-border flex items-center
+                 justify-center text-gray-500 hover:text-cyber-cyan
+                 hover:border-cyber-cyan/50 transition-all"
+        >
+          <i class="fas fa-external-link-alt text-xs"></i>
+        </a>
+        {% endif %}
+      </div>
+
+      <!-- Description -->
+      {% if cert.description %}
+      <p class="text-gray-400 text-xs leading-relaxed line-clamp-2">
+        {{ cert.description }}
+      </p>
+      {% endif %}
+
+      <!-- Meta row: effort + date -->
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-500">
+        {% if cert.estimated_effort %}
+        <span>
+          <i class="fas fa-gauge-high mr-1.5 text-cyber-cyan/50"></i>
+          {{ cert.estimated_effort }}
+        </span>
+        {% endif %}
+        {% if cert.issue_date %}
+        <span>
+          <i class="fas fa-calendar mr-1.5"></i>{{ cert.issue_date }}
+        </span>
+        {% endif %}
+        {% if cert.credential_id %}
+        <span class="font-mono text-gray-600 truncate">
+          ID: {{ cert.credential_id }}
+        </span>
+        {% endif %}
+      </div>
+
+    {% if cert.course_link %}</a>{% else %}</div>{% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% else %}
+  <div class="text-center py-20 text-gray-500">
+    <i class="fas fa-certificate text-4xl mb-4 text-gray-700 block"></i>
+    <p>No certifications found.</p>
+  </div>
+  {% endif %}
+</section>
+
+{% endblock %}

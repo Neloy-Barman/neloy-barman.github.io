@@ -1,0 +1,90 @@
+{# templates/components/seo_head.html #}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>{{ page_title }} | {{ config.site_name }}</title>
+<meta name="description" content="{{ page_desc }}" />
+<meta name="author" content="{{ config.site_author }}" />
+<meta name="keywords" content="{{ config.site_keywords }}" />
+<link rel="canonical" href="{{ canonical }}" />
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ page_title }}" />
+<meta property="og:description" content="{{ page_desc }}" />
+<meta property="og:url" content="{{ canonical }}" />
+<meta
+  property="og:image"
+  content="{{ config.site_url }}{{ config.og_image }}"
+/>
+<meta property="og:site_name" content="{{ config.site_name }}" />
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ page_title }}" />
+<meta name="twitter:description" content="{{ page_desc }}" />
+<meta
+  name="twitter:image"
+  content="{{ config.site_url }}{{ config.og_image }}"
+/>
+<meta name="twitter:site" content="{{ config.twitter_handle }}" />
+<!-- JSON-LD -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{ profile.full_name }}",
+    "jobTitle": "{{ profile.title }}",
+    "email": "{{ profile.email }}",
+    "url": "{{ config.site_url }}"
+  }
+</script>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+  rel="stylesheet"
+/>
+<!-- Font Awesome -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "cyber-cyan": "#00d4ff",
+          "cyber-purple": "#7c3aed",
+          "dark-base": "#0a0f1e",
+          "dark-card": "#0f1629",
+          "dark-border": "#1e2d4a",
+        },
+        fontFamily: {
+          mono: ["JetBrains Mono", "monospace"],
+          sans: ["Inter", "system-ui", "sans-serif"],
+        },
+      },
+    },
+  };
+</script>
+<!-- Main CSS -->
+<link rel="stylesheet" href="/static/css/main.css" />
+{% if analytics and analytics.analytics_enabled %}
+<!-- Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id={{ analytics.tracking_id }}"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "{{ analytics.tracking_id }}");
+</script>
+{% endif %}
