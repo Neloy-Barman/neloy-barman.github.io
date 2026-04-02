@@ -1,12 +1,15 @@
 experience_id,achievement,display_order,is_visible,is_deleted
-1,"Develop and deploy end-to-end conversational AI systems.",1,1,0
-1,"Design conversational flows and optimize chatbot performance.",2,1,0
-1,"Build and manage vector databases integrated with LLMs.",3,1,0
-1,"Preprocess and generate datasets to improve model accuracy.",4,1,0
-1,"Provide technical support, debugging, and solution architecture guidance.",5,1,0
-2,"Annotate and validate Speech-to-Text datasets.",1,1,0
-2,"Evaluate model outputs across multiple metrics.",2,1,0
-2,"Compare model performance and provide structured feedback.",3,1,0
+1,"Architected **LangGraph-based multi-agent workflow** replacing legacy **AWS Lex/ Lambda** system.",1,1,0
+1,"Improved **maintainability** and **control flow** across the entire conversational AI pipeline. ",2,1,0
+1,"Evaluated **6 latency reduction approaches** (keyword matching, semantic search, hybrid methods), selecting **few-shot** prompted intent-based navigation as the optimal strategy.",3,1,0
+1,"Integrated **Groq inference**, reducing response latency by **~65%** (6s → 1.5–2s)",4,1,0
+1,"Implemented **audio response caching strategy**, achieving an additional **0.5s latency reduction**.",5,1,0
+1,"Improved **real-time voice UX**, validated across **100+** test runs. ",6,1,0
+1,"Designed and deployed **conversational AI systems** integrating **Meta Developer Platform**.",7,1,0
+1,"Led **architecture decisions** involving **latency tradeoffs**, **token cost analysis**, and **scalability**.",8,1,0
+2,"Benchmarked **4 LLMs** across reasoning, accuracy, and instruction-following for model selection.",1,1,0
+2,"Curated **450+ multilingual** audio samples, correcting **STT** noise to enhance **ASR** model training.",2,1,0
+2,"Generated **computer vision datasets** by segmenting interactive UI components.",3,1,0
 3,"Develop datasets using advanced web scraping techniques.",1,1,0
 3,"Clean, analyze, and visualize data.",2,1,0
 3,"Optimize and evaluate LLMs and deep learning models.",3,1,0

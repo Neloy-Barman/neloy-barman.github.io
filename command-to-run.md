@@ -4,6 +4,7 @@
 - python -m database.seed
 - python -m build.build
 - python -m watch
+- cd output
 - python -m http.server 8000
 - Check with `localhost:8000` in the browser
 - All the data are being fetched from database/seed.py
