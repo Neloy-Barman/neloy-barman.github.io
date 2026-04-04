@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en" class="dark" data-theme="dark">
+ <head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>Resume | Neloy Barman</title>
+<meta name="description" content="Professional resume and career summary." />
+<meta name="author" content="Neloy Barman" />
+<meta name="keywords" content="n8n, Agentic AI, AI Automation, Chatbot, Voice AI, Langchain, Langgraph, Python" />
+<link rel="canonical" href="https://neloy-barman.github.io//resume/" />
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Resume" />
+<meta property="og:description" content="Professional resume and career summary." />
+<meta property="og:url" content="https://neloy-barman.github.io//resume/" />
+<meta
+ property="og:image"
+ content="https://neloy-barman.github.io/"
+/>
+<meta property="og:site_name" content="Neloy Barman" />
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Resume" />
+<meta name="twitter:description" content="Professional resume and career summary." />
+<meta
+ name="twitter:image"
+ content="https://neloy-barman.github.io/"
+/>
+<meta name="twitter:site" content="" />
+<!-- JSON-LD -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Neloy Barman",
+    "jobTitle": "Agentic AI Engineer",
+    "email": "neloycareer018@gmail.com",
+    "url": "https://neloy-barman.github.io/"
+  }
+</script>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+ href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+ rel="stylesheet"
+/>
+<!-- Font Awesome -->
+<link
+ rel="stylesheet"
+ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "cyber-cyan": "#00d4ff",
+          "cyber-purple": "#7c3aed",
+          "dark-base": "#0a0f1e",
+          "dark-card": "#0f1629",
+          "dark-border": "#1e2d4a",
+        },
+        fontFamily: {
+          mono: ["JetBrains Mono", "monospace"],
+          sans: ["Inter", "system-ui", "sans-serif"],
+        },
+      },
+    },
+  };
+</script>
+<!-- Main CSS -->
+<link rel="stylesheet" href="/static/css/main.css" />
+ <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"
+    ></script>
+ </head>
+ <body
+ class="bg-dark-base text-gray-100 font-sans antialiased transition-colors duration-300"
+ >
+ <!-- Skip to content -->
+ <a
+ href="#main-content"
+ class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-cyber-cyan focus:text-dark-base focus:rounded-lg focus:font-semibold"
+ >
+ Skip to content
+ </a>
+ <!-- ── Global Neural Background (all pages) ── -->
+ <canvas
+ id="neural-canvas"
+ style="
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ pointer-events: none;
+ z-index: 0;
+ opacity: 0.18;
+ "
+ ></canvas>
+ <!-- ── Global Glow Orbs (all pages) ── -->
+ <div class="global-orb global-orb-1"></div>
+ <div class="global-orb global-orb-2"></div>
+ <!-- ── Global Grid Background ── -->
+ <div
+ style="
+ position: fixed;
+ inset: 0;
+ pointer-events: none;
+ z-index: 0;
+ opacity: 0.06;
+ background-image:
+ linear-gradient(rgba(0, 212, 255, 0.4) 1px, transparent 1px),
+ linear-gradient(90deg, rgba(0, 212, 255, 0.4) 1px, transparent 1px);
+ background-size: 60px 60px;
+ "
+ ></div>
+<nav
+ class="fixed top-0 left-0 right-0 z-50 nav-glass"
+ role="navigation"
+ aria-label="Main navigation"
+>
+ <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+ <div class="flex items-center justify-between h-16">
+ <!-- Logo -->
+ <a href="/" class="flex items-center gap-2 group" aria-label="Home">
+ <div
+ class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyber-cyan to-cyber-purple flex items-center justify-center text-white font-mono font-bold text-sm group-hover:scale-110 transition-transform"
+ >
+ N
+ </div>
+ <span
+ class="font-mono font-semibold text-white text-sm hidden sm:block"
+ >
+ Neloy Barman
+ </span>
+ </a>
+ <!-- Desktop Nav -->
+ <div class="hidden md:flex items-center gap-1">
+ <a
+ href="/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ Home
+ </a>
+ <a
+ href="/about/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ About
+ </a>
+ <a
+ href="/experience/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ Experience
+ </a>
+ <a
+ href="/education/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ Education
+ </a>
+ <a
+ href="/skills/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ Skills
+ </a>
+ <a
+ href="/projects/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ Projects
+ </a>
+ <a
+ href="/blog/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ Blog
+ </a>
+ <a
+ href="/certifications/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ Certifications
+ </a>
+ <a
+ href="/contact/"
+ class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 "
+ aria-current="false"
+ >
+ Contact
+ </a>
+ <a
+ href="/resume/"
+ class="ml-3 px-4 py-2 rounded-lg text-sm font-semibold border border-cyber-cyan text-cyber-cyan hover:bg-cyber-cyan hover:text-dark-base transition-all duration-200"
+ aria-label="View Resume"
+ >
+ Resume
+ </a>
+ </div>
+ <!-- Theme toggle + Mobile menu button -->
+ <div class="flex items-center gap-3">
+ <button
+ id="theme-toggle"
+ aria-label="Toggle theme"
+ class="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-all"
+ >
+ <i class="fas fa-sun hidden" id="icon-light"></i>
+ <i class="fas fa-moon" id="icon-dark"></i>
+ </button>
+ <button
+ id="mobile-menu-btn"
+ aria-label="Open menu"
+ aria-expanded="false"
+ class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-all"
+ >
+ <i class="fas fa-bars" id="menu-icon-open"></i>
+ <i class="fas fa-times hidden" id="menu-icon-close"></i>
+ </button>
+ </div>
+ </div>
+ </div>
+ <!-- Mobile Menu -->
+ <div
+ id="mobile-menu"
+ class="hidden md:hidden border-t border-dark-border bg-dark-base/95 backdrop-blur"
+ >
+ <div class="px-4 py-3 space-y-1">
+ <a
+ href="/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ Home
+ </a>
+ <a
+ href="/about/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ About
+ </a>
+ <a
+ href="/experience/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ Experience
+ </a>
+ <a
+ href="/education/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ Education
+ </a>
+ <a
+ href="/skills/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ Skills
+ </a>
+ <a
+ href="/projects/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ Projects
+ </a>
+ <a
+ href="/blog/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ Blog
+ </a>
+ <a
+ href="/certifications/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ Certifications
+ </a>
+ <a
+ href="/contact/"
+ class="block px-3 py-2 rounded-md text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-white/5"
+ >
+ Contact
+ </a>
+ <a
+ href="/resume/"
+ class="block mt-2 px-3 py-2 rounded-md text-sm font-semibold text-cyber-cyan border border-cyber-cyan/50 text-center hover:bg-cyber-cyan/10 transition-all"
+ >
+ Resume
+ </a>
+ </div>
+ </div>
+</nav>
+ <main
+ id="main-content"
+ class="pt-16"
+ style="position: relative; z-index: 1"
+ >
+<section class="py-24 max-w-5xl mx-auto px-4">
+ <!-- Header -->
+ <div class="flex items-center justify-between mb-10 flex-wrap gap-4">
+ <div>
+ <p class="text-cyber-cyan font-mono text-sm mb-2">// curriculum vitae</p>
+ <h1 class="text-4xl sm:text-5xl font-bold text-white">Resume</h1>
+ </div>
+ <div class="flex gap-3 flex-wrap">
+ <!-- Download Button -->
+ <a
+ href="/static/resume/NELOY_BARMAN_RESUME_2026-04-04.pdf"
+ download
+ target="_blank"
+ class="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-cyber-cyan text-cyber-cyan font-semibold text-sm hover:bg-cyber-cyan hover:text-dark-base transition-all duration-200"
+ >
+ <i class="fas fa-download"></i> Download PDF
+ </a>
+ <!-- Open in new tab -->
+ <a
+ href="/static/resume/NELOY_BARMAN_RESUME_2026-04-04.pdf"
+ target="_blank"
+ rel="noopener noreferrer"
+ class="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-dark-border text-gray-400 font-semibold text-sm hover:text-white hover:border-white/30 transition-all duration-200"
+ >
+ <i class="fas fa-external-link-alt"></i> Open Full Screen
+ </a>
+ </div>
+ </div>
+ <!-- PDF Viewer -->
+ <div
+ class="rounded-2xl overflow-hidden border border-dark-border shadow-glow"
+ >
+ <!-- Toolbar Bar -->
+ <div
+ class="flex items-center gap-3 px-5 py-3 bg-dark-card border-b border-dark-border"
+ >
+ <div class="flex gap-1.5">
+ <span class="w-3 h-3 rounded-full bg-red-500/70"></span>
+ <span class="w-3 h-3 rounded-full bg-yellow-500/70"></span>
+ <span class="w-3 h-3 rounded-full bg-green-500/70"></span>
+ </div>
+ <span class="font-mono text-xs text-gray-500 ml-2">
+ <i class="fas fa-file-pdf text-cyber-cyan mr-2"></i>
+ Neloy Barman — Resume.pdf
+ </span>
+ <a
+ href="/static/resume/NELOY_BARMAN_RESUME_2026-04-04.pdf"
+ target="_blank"
+ rel="noopener noreferrer"
+ class="ml-auto text-xs text-gray-500 hover:text-cyber-cyan transition-colors font-mono"
+ >
+ <i class="fas fa-expand-alt mr-1"></i>fullscreen
+ </a>
+ </div>
+ <!-- Embedded PDF — Primary: native iframe -->
+ <div class="relative w-full bg-dark-base" style="height: 85vh">
+ <!-- Try native iframe first -->
+ <iframe
+ id="pdf-iframe"
+ src="/static/resume/NELOY_BARMAN_RESUME_2026-04-04.pdf"
+ title="Resume PDF"
+ class="w-full h-full border-0"
+ loading="lazy"
+ >
+ </iframe>
+ <!-- Fallback: Google Docs Viewer (shown if iframe fails) -->
+ <div
+ id="pdf-fallback"
+ class="absolute inset-0 flex-col items-center justify-center gap-6 bg-dark-base"
+ style="display: none"
+ >
+ <iframe
+ src="https://docs.google.com/viewer?url=/static/resume/NELOY_BARMAN_RESUME_2026-04-04.pdf&embedded=true"
+ title="Resume PDF Viewer"
+ class="w-full h-full border-0"
+ loading="lazy"
+ >
+ </iframe>
+ </div>
+ <!-- Last resort fallback message -->
+ <div
+ id="pdf-message"
+ class="absolute inset-0 flex-col items-center justify-center gap-6 bg-dark-base"
+ style="display: none"
+ >
+ <i class="fas fa-file-pdf text-cyber-cyan text-5xl"></i>
+ <div class="text-center">
+ <p class="text-white font-semibold mb-2">PDF Preview Not Available</p>
+ <p class="text-gray-400 text-sm mb-6">
+ Your browser may be blocking the preview.
+ </p>
+ <div class="flex gap-3 justify-center flex-wrap">
+ <a
+ href="/static/resume/NELOY_BARMAN_RESUME_2026-04-04.pdf"
+ download
+ class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyber-cyan to-cyber-purple text-white font-semibold text-sm hover:opacity-90 transition-all"
+ >
+ <i class="fas fa-download mr-2"></i>Download PDF
+ </a>
+ <a
+ href="/static/resume/NELOY_BARMAN_RESUME_2026-04-04.pdf"
+ target="_blank"
+ class="px-6 py-2.5 rounded-xl border border-dark-border text-gray-300 font-semibold text-sm hover:text-white transition-all"
+ >
+ <i class="fas fa-external-link-alt mr-2"></i>Open in New Tab
+ </a>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
+ </main>
+<footer class="border-t border-dark-border mt-24" role="contentinfo">
+ <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+ <!-- Brand -->
+ <div>
+ <div class="flex items-center gap-2 mb-3">
+ <div
+ class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyber-cyan to-cyber-purple flex items-center justify-center text-white font-mono font-bold text-sm"
+ >
+ N
+ </div>
+ <span class="font-mono font-semibold text-white"
+ >Neloy Barman</span
+ >
+ </div>
+ <p class="text-gray-400 text-sm leading-relaxed">
+ AI Engineer specializing in Large Language Models, Voice AI systems, and Agentic automation pipelines.
+ </p>
+ </div>
+ <!-- Quick Links -->
+ <div>
+ <h3
+ class="text-white font-semibold text-sm mb-4 uppercase tracking-wider"
+ >
+ Quick Links
+ </h3>
+ <ul class="space-y-2">
+ <li>
+ <a
+ href="/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Home
+ </a>
+ </li>
+ <li>
+ <a
+ href="/about/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ About
+ </a>
+ </li>
+ <li>
+ <a
+ href="/experience/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Experience
+ </a>
+ </li>
+ <li>
+ <a
+ href="/education/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Education
+ </a>
+ </li>
+ <li>
+ <a
+ href="/skills/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Skills
+ </a>
+ </li>
+ <li>
+ <a
+ href="/projects/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Projects
+ </a>
+ </li>
+ <li>
+ <a
+ href="/blog/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Blog
+ </a>
+ </li>
+ <li>
+ <a
+ href="/certifications/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Certifications
+ </a>
+ </li>
+ <li>
+ <a
+ href="/contact/"
+ class="text-gray-400 hover:text-cyber-cyan text-sm transition-colors"
+ >
+ Contact
+ </a>
+ </li>
+ </ul>
+ </div>
+ <!-- Social Links -->
+ <div>
+ <h3
+ class="text-white font-semibold text-sm mb-4 uppercase tracking-wider"
+ >
+ Connect
+ </h3>
+ <div class="flex flex-wrap gap-3">
+ <a
+ href="https://github.com/Neloy-Barman"
+ target="_blank"
+ rel="noopener noreferrer"
+ aria-label="GitHub"
+ style="width: 40px; height: 40px"
+ class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan/50 hover:bg-cyber-cyan/10 transition-all duration-200"
+ >
+ <span
+ class="iconify"
+ data-icon="skill-icons:github-dark"
+ data-width="25"
+ data-height="25"
+ ></span>
+ </a>
+ <a
+ href="https://www.linkedin.com/in/neloy-barman/"
+ target="_blank"
+ rel="noopener noreferrer"
+ aria-label="LinkedIn"
+ style="width: 40px; height: 40px"
+ class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan/50 hover:bg-cyber-cyan/10 transition-all duration-200"
+ >
+ <span
+ class="iconify"
+ data-icon="skill-icons:linkedin"
+ data-width="25"
+ data-height="25"
+ ></span>
+ </a>
+ <a
+ href="https://n8n.io/creators/neloy-barman/"
+ target="_blank"
+ rel="noopener noreferrer"
+ aria-label="n8n Creator"
+ style="width: 40px; height: 40px"
+ class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan/50 hover:bg-cyber-cyan/10 transition-all duration-200"
+ >
+ <span
+ class="iconify"
+ data-icon="simple-icons:n8n"
+ data-width="25"
+ data-height="25"
+ ></span>
+ </a>
+ <a
+ href="https://medium.com/@neloyupwork018"
+ target="_blank"
+ rel="noopener noreferrer"
+ aria-label="Medium"
+ style="width: 40px; height: 40px"
+ class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan/50 hover:bg-cyber-cyan/10 transition-all duration-200"
+ >
+ <span
+ class="iconify"
+ data-icon="simple-icons:medium"
+ data-width="25"
+ data-height="25"
+ ></span>
+ </a>
+ <a
+ href="https://leetcode.com/u/neloycareer018/"
+ target="_blank"
+ rel="noopener noreferrer"
+ aria-label="LeetCode"
+ style="width: 40px; height: 40px"
+ class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan/50 hover:bg-cyber-cyan/10 transition-all duration-200"
+ >
+ <span
+ class="iconify"
+ data-icon="simple-icons:leetcode"
+ data-width="25"
+ data-height="25"
+ ></span>
+ </a>
+ <a
+ href="https://www.kaggle.com/neloybarman018"
+ target="_blank"
+ rel="noopener noreferrer"
+ aria-label="Kaggle"
+ style="width: 40px; height: 40px"
+ class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan/50 hover:bg-cyber-cyan/10 transition-all duration-200"
+ >
+ <span
+ class="iconify"
+ data-icon="devicon:kaggle"
+ data-width="25"
+ data-height="25"
+ ></span>
+ </a>
+ <a
+ href="mailto:neloycareer018@gmail.com"
+ target="_blank"
+ rel="noopener noreferrer"
+ aria-label="Mail"
+ style="width: 40px; height: 40px"
+ class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-cyber-cyan hover:border-cyber-cyan/50 hover:bg-cyber-cyan/10 transition-all duration-200"
+ >
+ <span
+ class="iconify"
+ data-icon="skill-icons:gmail-light"
+ data-width="25"
+ data-height="25"
+ ></span>
+ </a>
+ </div>
+ <a
+ href="mailto:neloycareer018@gmail.com"
+ class="mt-4 block text-sm text-gray-400 hover:text-cyber-cyan transition-colors"
+ >
+ <i class="fas fa-envelope mr-2"></i>neloycareer018@gmail.com
+ </a>
+ </div>
+ </div>
+ <!-- Bottom Bar -->
+ <div
+ class="mt-10 pt-6 border-t border-dark-border flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-500"
+ >
+ <p>© 2026 Neloy Barman. All rights reserved.</p>
+ <p class="font-mono text-xs flex items-center gap-1.5">
+ Built with
+ <span style="color: #da7756">Claude Sonnet 4.6</span>
+ </p>
+ </div>
+ </div>
+</footer>
+ <script defer src="/static/js/theme.js"></script>
+ <script defer src="/static/js/main.js"></script>
+ <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<script>
+  // If iframe fails to load, show Google Docs fallback
+  (function () {
+    var iframe = document.getElementById("pdf-iframe");
+    var fallback = document.getElementById("pdf-fallback");
+    var message = document.getElementById("pdf-message");
+    if (!iframe) return;
+
+    iframe.addEventListener("error", function () {
+      iframe.style.display = "none";
+      fallback.style.display = "flex";
+    });
+
+    // Some browsers don't fire error on blocked iframes
+    // Check after 5s if iframe loaded anything
+    setTimeout(function () {
+      try {
+        var doc = iframe.contentDocument || iframe.contentWindow.document;
+        if (!doc || doc.body.innerHTML === "") {
+          iframe.style.display = "none";
+          fallback.style.display = "flex";
+        }
+      } catch (e) {
+        // Cross-origin — PDF is loading fine, do nothing
+      }
+    }, 5000);
+  })();
+</script>
+ </body>
+</html>
