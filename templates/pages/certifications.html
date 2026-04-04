@@ -2,11 +2,22 @@
 {% extends "base.html" %}
 {% block content %}
 
+{# ── Macro: resolve logo src ──────────────────────────────────────── #}
+{% macro logo_src(logo_url) -%}
+  {%- if not logo_url -%}
+    https://placehold.co/55x55/0a0f1e/00d4ff?text=Cert
+  {%- elif logo_url.startswith('http://') or logo_url.startswith('https://') -%}
+    {{ logo_url }}
+  {%- else -%}
+    /static/{{ logo_url }}
+  {%- endif -%}
+{%- endmacro %}
+
 <section class="py-24 max-w-6xl mx-auto px-4">
   <div class="mb-12">
     <p class="text-cyber-cyan font-mono text-sm mb-2">// credentials</p>
     <h1 class="text-4xl sm:text-5xl font-bold text-white">
-      Certifications & Courses
+      Certifications &amp; Courses
     </h1>
   </div>
 
@@ -22,29 +33,35 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {% for cert in featured_certs %}
 
-      {# Wrap the entire card in an <a> if course_link exists, else a plain div #}
-      {% if cert.course_link %}
-      <a href="{{ cert.course_link }}"
-         target="_blank"
-         rel="noopener noreferrer"
-         class="group block p-6 rounded-2xl border border-cyber-cyan/30 bg-cyber-cyan/5
-                hover:border-cyber-cyan/60 hover:bg-cyber-cyan/10
-                transition-all duration-300 slide-up">
-      {% else %}
-      <div class="group p-6 rounded-2xl border border-cyber-cyan/30 bg-cyber-cyan/5
-                  hover:border-cyber-cyan/60 transition-all duration-300 slide-up">
-      {% endif %}
-
+      {#
+        IMPORTANT: Never nest <a> inside <a> — browser will break the layout.
+        Solution: always use <div> as the card wrapper.
+        Make the whole card clickable via JS if course_link exists.
+      #}
+      <div
+        class="group flex flex-col p-6 rounded-2xl border border-cyber-cyan/30
+               bg-cyber-cyan/5 hover:border-cyber-cyan/60 hover:bg-cyber-cyan/10
+               transition-all duration-300 slide-up
+               {% if cert.course_link %}cursor-pointer{% endif %}"
+        {% if cert.course_link %}
+          onclick="window.open('{{ cert.course_link }}','_blank','noopener,noreferrer');"
+          role="link"
+          tabindex="0"
+          onkeydown="if(event.key==='Enter') window.open('{{ cert.course_link }}','_blank','noopener,noreferrer');"
+        {% endif %}
+      >
         <!-- Header: logo + title -->
         <div class="flex items-start gap-4 mb-4">
-          <img
-            src="{{ cert.logo_url }}"
-            alt="{{ cert.issuer }}"
-            loading="lazy"
-            style="width: 55px; height: 55px; padding: 2px"
-            class="org-logo rounded-xl object-contain border border-dark-border shrink-0"
-            onerror="this.src='https://placehold.co/48x48/0a0f1e/00d4ff?text=Cert'"
-          />
+        <img
+          src="{{ logo_src(cert.logo_url) }}"
+          alt="{{ cert.issuer }}"
+          loading="lazy"
+          style="width:48px;height:48px;padding:6px;"
+          class="org-logo rounded-xl object-contain border border-dark-border bg-white/5 shrink-0"
+          onerror="
+            this.src='https://placehold.co/48x48/0a0f1e/00d4ff?text=Cert'
+          "
+        />
           <div class="flex-1 min-w-0">
             <h3 class="font-bold text-white text-sm leading-tight flex items-center gap-1.5">
               {{ cert.title }}
@@ -64,8 +81,8 @@
         </p>
         {% endif %}
 
-        <!-- Meta: dates / effort / credential id -->
-        <div class="text-xs text-gray-500 space-y-1">
+        <!-- Meta -->
+        <div class="text-xs text-gray-500 space-y-1 flex-1">
           {% if cert.estimated_effort %}
           <p>
             <i class="fas fa-gauge-high mr-2 text-cyber-cyan/50"></i>
@@ -73,33 +90,24 @@
           </p>
           {% endif %}
           {% if cert.issue_date %}
-          <p>
-            <i class="fas fa-calendar mr-2"></i>Issued: {{ cert.issue_date }}
-          </p>
+          <p><i class="fas fa-calendar mr-2"></i>Issued: {{ cert.issue_date }}</p>
           {% endif %}
           {% if cert.expiry_date %}
-          <p>
-            <i class="fas fa-clock mr-2"></i>Expires: {{ cert.expiry_date }}
-          </p>
+          <p><i class="fas fa-clock mr-2"></i>Expires: {{ cert.expiry_date }}</p>
           {% endif %}
           {% if cert.credential_id %}
           <p class="font-mono text-gray-600">ID: {{ cert.credential_id }}</p>
           {% endif %}
         </div>
 
-        <!-- Footer actions -->
+        <!-- Footer: Verify Credential — safe <a>, no nesting issue -->
         {% if cert.credential_url %}
         <div class="mt-4 pt-4 border-t border-dark-border/60">
-          {#
-            Stop propagation so "Verify Credential" doesn't bubble up to the
-            outer <a> (course_link). We use an inner <a> with a click handler.
-          #}
           <a
             href="{{ cert.credential_url }}"
             target="_blank"
             rel="noopener noreferrer"
-            onclick="event.stopPropagation(); event.preventDefault();
-                     window.open(this.href,'_blank','noopener,noreferrer');"
+            onclick="event.stopPropagation();"
             class="inline-flex items-center gap-1.5 text-xs text-gray-400
                    hover:text-cyber-cyan transition-colors"
           >
@@ -108,7 +116,7 @@
         </div>
         {% endif %}
 
-      {% if cert.course_link %}</a>{% else %}</div>{% endif %}
+      </div>
       {% endfor %}
     </div>
   </div>
@@ -121,28 +129,29 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     {% for cert in other_certs %}
 
-    {% if cert.course_link %}
-    <a href="{{ cert.course_link }}"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="group flex flex-col gap-3 p-5 rounded-2xl border border-dark-border
-              hover:border-cyber-cyan/30 transition-all duration-300
-              bg-dark-card/40 slide-up">
-    {% else %}
-    <div class="group flex flex-col gap-3 p-5 rounded-2xl border border-dark-border
-                hover:border-cyber-cyan/30 transition-all duration-300
-                bg-dark-card/40 slide-up">
-    {% endif %}
-
+    <div
+      class="group flex flex-col gap-3 p-5 rounded-2xl border border-dark-border
+             hover:border-cyber-cyan/30 transition-all duration-300
+             bg-dark-card/40 slide-up
+             {% if cert.course_link %}cursor-pointer{% endif %}"
+      {% if cert.course_link %}
+        onclick="window.open('{{ cert.course_link }}','_blank','noopener,noreferrer');"
+        role="link"
+        tabindex="0"
+        onkeydown="if(event.key==='Enter') window.open('{{ cert.course_link }}','_blank','noopener,noreferrer');"
+      {% endif %}
+    >
       <!-- Top row: logo + title + verify icon -->
       <div class="flex items-center gap-4">
         <img
           src="{{ cert.logo_url }}"
           alt="{{ cert.issuer }}"
           loading="lazy"
-          style="width: 48px; height: 48px; padding: 2px"
-          class="org-logo rounded-xl object-contain border border-dark-border shrink-0"
-          onerror="this.src='https://placehold.co/48x48/0a0f1e/00d4ff?text=Cert'"
+          style="width:48px;height:48px;padding:6px;"
+          class="org-logo rounded-xl object-contain border border-dark-border bg-white/5 shrink-0"
+          onerror="
+            this.src='https://placehold.co/48x48/0a0f1e/00d4ff?text=Cert'
+          "
         />
         <div class="flex-1 min-w-0">
           <h3 class="font-semibold text-white text-sm leading-tight flex items-center gap-1.5">
@@ -155,15 +164,14 @@
           <p class="text-gray-400 text-xs mt-0.5">{{ cert.issuer }}</p>
         </div>
 
-        <!-- Verify credential button (non-featured) -->
+        <!-- Safe verify button — stopPropagation only, no nesting -->
         {% if cert.credential_url %}
         <a
           href="{{ cert.credential_url }}"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Verify {{ cert.title }}"
-          onclick="event.stopPropagation(); event.preventDefault();
-                   window.open(this.href,'_blank','noopener,noreferrer');"
+          onclick="event.stopPropagation();"
           class="shrink-0 w-8 h-8 rounded-lg border border-dark-border flex items-center
                  justify-center text-gray-500 hover:text-cyber-cyan
                  hover:border-cyber-cyan/50 transition-all"
@@ -180,7 +188,7 @@
       </p>
       {% endif %}
 
-      <!-- Meta row: effort + date -->
+      <!-- Meta row -->
       <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-500">
         {% if cert.estimated_effort %}
         <span>
@@ -189,18 +197,14 @@
         </span>
         {% endif %}
         {% if cert.issue_date %}
-        <span>
-          <i class="fas fa-calendar mr-1.5"></i>{{ cert.issue_date }}
-        </span>
+        <span><i class="fas fa-calendar mr-1.5"></i>{{ cert.issue_date }}</span>
         {% endif %}
         {% if cert.credential_id %}
-        <span class="font-mono text-gray-600 truncate">
-          ID: {{ cert.credential_id }}
-        </span>
+        <span class="font-mono text-gray-600 truncate">ID: {{ cert.credential_id }}</span>
         {% endif %}
       </div>
 
-    {% if cert.course_link %}</a>{% else %}</div>{% endif %}
+    </div>
     {% endfor %}
   </div>
   {% endif %}
@@ -212,5 +216,4 @@
   </div>
   {% endif %}
 </section>
-
 {% endblock %}
